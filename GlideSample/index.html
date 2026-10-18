@@ -151,12 +151,12 @@
         <div class="touch-hint right">Hold to boost</div>
         <div id="stick" hidden></div>
       </div>
-      <div id="status">Loading...</div>
+      <div id="status">Loading content...</div>
     </div>
 
     <div class="game-bar">
       <span id="keys-help"><b>Space</b> - start &nbsp; <b>WASD</b> / <b>arrows</b> - steer &nbsp; <b>Shift</b> - boost &nbsp; <b>I</b> - invert controls</span>
-      <span id="touch-help" hidden><b>Tap</b> - start &nbsp; <b>Drag left side</b> - steer &nbsp; <b>Hold right side</b> - boost<span id="rotate-hint"> &nbsp; Turn your phone sideways for a bigger view</span></span>
+      <span id="touch-help" hidden><b>Tap</b> - start &nbsp; <b>Drag left side</b> - steer &nbsp; <b>Hold right side</b> - boost</span>
       <button id="fullscreen" type="button">Fullscreen</button>
     </div>
   </main>
@@ -200,15 +200,27 @@
     // the scene is on screen by the time GI starts up
     function onEngineLog(text)
     {
-        if (!isRunning && text.indexOf('Glimmer start: SH') >= 0)
+        if (!isRunning && text.indexOf(isTouchDevice ? 'GlideGame launched' : 'Glimmer start: SH') >= 0)
         {
             onFirstFrames();
         }
     }
 
+    const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    const mobileVariables = [
+        'Rendering.Glimmer.Enabled=false',
+        'Rendering.SSR=false',
+        'Rendering.GTAO=false',
+        'Rendering.Clouds=false',
+        'Rendering.FogVolumes=false',
+        'Rendering.Shadows.CSMMaxDistance=200',
+        'Rendering.Shadows.CSMMaxStaleFrames=16'
+    ];
+
     var Module = {
         canvas: canvasElement,
-        arguments: new URLSearchParams(location.search).getAll('set'),
+        arguments: (isTouchDevice ? mobileVariables : []).concat(new URLSearchParams(location.search).getAll('set')),
         print: (text) => { console.log(text); onEngineLog(text); },
         printErr: (text) => { console.warn(text); onEngineLog(text); },
         setStatus: (text) => {
@@ -396,7 +408,7 @@
         touchElement.addEventListener('touchcancel', onTouchEnd, { passive: false });
     }
 
-    if (matchMedia('(hover: none) and (pointer: coarse)').matches)
+    if (isTouchDevice)
     {
         setUpTouchControls();
     }
