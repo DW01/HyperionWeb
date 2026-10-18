@@ -4,23 +4,23 @@
     "compressedSize": 156868
   },
   "Meshes.bin": {
-    "size": 29643637,
-    "compressedSize": 9086686
+    "size": 27943989,
+    "compressedSize": 9081388
   },
   "RawData.bin": {
     "size": 1310736,
     "compressedSize": 257391
   },
   "Shaders.bin": {
-    "size": 10815373,
-    "compressedSize": 373610
+    "size": 8209875,
+    "compressedSize": 384709
   },
   "Textures.bin": {
-    "size": 39190824,
-    "compressedSize": 10218198
+    "size": 30327080,
+    "compressedSize": 8225149
   },
   "toc.bin": {
     "size": 81944,
-    "compressedSize": 16775
+    "compressedSize": 15967
   }
 }
