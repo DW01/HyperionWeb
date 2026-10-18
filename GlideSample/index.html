@@ -460,9 +460,32 @@
     {
         sessionStorage.removeItem('isolationReload');
 
-        const engineScript = document.createElement('script');
-        engineScript.src = 'Glide.js';
-        document.body.appendChild(engineScript);
+        const startEngine = () => {
+            const engineScript = document.createElement('script');
+            engineScript.src = 'Glide.js';
+            document.body.appendChild(engineScript);
+        };
+
+        fetch('Glide.data.gz')
+            .then((response) => {
+                if (!response.ok)
+                {
+                    return null;
+                }
+
+                const isDecodedByBrowser = (response.headers.get('Content-Encoding') || '').includes('gzip');
+
+                return isDecodedByBrowser ? response.arrayBuffer() : new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+            })
+            .then((packageData) => {
+                if (packageData)
+                {
+                    Module.getPreloadedPackage = () => packageData;
+                }
+
+                startEngine();
+            })
+            .catch((error) => showStatus('Couldn\'t download the game: ' + error));
     }
     else if ('serviceWorker' in navigator && isSecureContext && !sessionStorage.getItem('isolationReload'))
     {
