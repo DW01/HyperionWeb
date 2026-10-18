@@ -70,6 +70,61 @@
     }
 
     #fullscreen:hover { color: var(--text); }
+
+    #touch {
+      position: absolute;
+      inset: 0;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    #touch[hidden] { display: none; }
+
+    .touch-hint {
+      position: absolute;
+      bottom: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      transition: opacity 0.6s;
+    }
+
+    .touch-hint.left { left: 16px; }
+    .touch-hint.right { right: 16px; }
+
+    #touch.used .touch-hint { opacity: 0; }
+
+    #stick {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      margin: -36px 0 0 -36px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    #stick::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      margin: -12px 0 0 -12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(var(--dx, 0), var(--dy, 0));
+    }
+
+    #stick[hidden] { display: none; }
+
+    #rotate-hint { display: none; }
+
+    @media (orientation: portrait) {
+      #rotate-hint { display: inline; }
+    }
   </style>
 </head>
 <body>
@@ -91,11 +146,17 @@
 
     <div id="frame" class="game-frame">
       <canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Glide"></canvas>
+      <div id="touch" hidden>
+        <div class="touch-hint left">Drag to steer</div>
+        <div class="touch-hint right">Hold to boost</div>
+        <div id="stick" hidden></div>
+      </div>
       <div id="status">Loading...</div>
     </div>
 
     <div class="game-bar">
-      <span><b>Space</b> - start &nbsp; <b>WASD</b> / <b>arrows</b> - steer &nbsp; <b>Shift</b> - boost &nbsp; <b>I</b> - invert controls</span>
+      <span id="keys-help"><b>Space</b> - start &nbsp; <b>WASD</b> / <b>arrows</b> - steer &nbsp; <b>Shift</b> - boost &nbsp; <b>I</b> - invert controls</span>
+      <span id="touch-help" hidden><b>Tap</b> - start &nbsp; <b>Drag left side</b> - steer &nbsp; <b>Hold right side</b> - boost<span id="rotate-hint"> &nbsp; Turn your phone sideways for a bigger view</span></span>
       <button id="fullscreen" type="button">Fullscreen</button>
     </div>
   </main>
@@ -188,6 +249,157 @@
     document.getElementById('fullscreen').addEventListener('click', () => {
         frameElement.requestFullscreen().then(() => canvasElement.focus()).catch(() => {});
     });
+
+    function setUpTouchControls()
+    {
+        const touchElement = document.getElementById('touch');
+        const stickElement = document.getElementById('stick');
+        const deadZone = 14;
+        const stickReach = 24;
+        const heldCodes = new Set();
+
+        let steerTouch = null;
+        let boostTouchId = null;
+        let hasAskedForFullscreen = false;
+
+        touchElement.hidden = false;
+        document.getElementById('keys-help').hidden = true;
+        document.getElementById('touch-help').hidden = false;
+
+        function sendKey(type, code)
+        {
+            window.dispatchEvent(new KeyboardEvent(type, { code: code, key: code, bubbles: true, cancelable: true }));
+        }
+
+        function setHeld(code, isHeld)
+        {
+            if (isHeld === heldCodes.has(code))
+            {
+                return;
+            }
+
+            if (isHeld)
+            {
+                heldCodes.add(code);
+            }
+            else
+            {
+                heldCodes.delete(code);
+            }
+
+            sendKey(isHeld ? 'keydown' : 'keyup', code);
+        }
+
+        function updateSteer(x, y)
+        {
+            const dx = x - steerTouch.x;
+            const dy = y - steerTouch.y;
+
+            setHeld('ArrowLeft', dx < -deadZone);
+            setHeld('ArrowRight', dx > deadZone);
+            setHeld('ArrowUp', dy < -deadZone);
+            setHeld('ArrowDown', dy > deadZone);
+
+            const length = Math.hypot(dx, dy);
+            const scale = length > stickReach ? stickReach / length : 1;
+
+            stickElement.style.setProperty('--dx', (dx * scale) + 'px');
+            stickElement.style.setProperty('--dy', (dy * scale) + 'px');
+        }
+
+        function releaseSteer()
+        {
+            steerTouch = null;
+            stickElement.hidden = true;
+
+            for (const code of ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'])
+            {
+                setHeld(code, false);
+            }
+        }
+
+        function findTouch(touches, id)
+        {
+            return Array.from(touches).find((touch) => touch.identifier === id);
+        }
+
+        touchElement.addEventListener('touchstart', (event) => {
+            event.preventDefault();
+
+            sendKey('keydown', 'Space');
+            setTimeout(() => sendKey('keyup', 'Space'), 50);
+
+            const rect = touchElement.getBoundingClientRect();
+
+            for (const touch of event.changedTouches)
+            {
+                if (touch.clientX < rect.left + rect.width / 2)
+                {
+                    if (steerTouch === null)
+                    {
+                        steerTouch = { id: touch.identifier, x: touch.clientX, y: touch.clientY };
+
+                        stickElement.style.left = (touch.clientX - rect.left) + 'px';
+                        stickElement.style.top = (touch.clientY - rect.top) + 'px';
+                        stickElement.style.setProperty('--dx', '0px');
+                        stickElement.style.setProperty('--dy', '0px');
+                        stickElement.hidden = false;
+
+                        touchElement.classList.add('used');
+                    }
+                }
+                else if (boostTouchId === null)
+                {
+                    boostTouchId = touch.identifier;
+                    setHeld('ShiftLeft', true);
+                }
+            }
+        }, { passive: false });
+
+        touchElement.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+
+            const touch = steerTouch !== null ? findTouch(event.changedTouches, steerTouch.id) : undefined;
+
+            if (touch)
+            {
+                updateSteer(touch.clientX, touch.clientY);
+            }
+        }, { passive: false });
+
+        function onTouchEnd(event)
+        {
+            event.preventDefault();
+
+            if (steerTouch !== null && findTouch(event.changedTouches, steerTouch.id))
+            {
+                releaseSteer();
+            }
+
+            if (boostTouchId !== null && findTouch(event.changedTouches, boostTouchId))
+            {
+                boostTouchId = null;
+                setHeld('ShiftLeft', false);
+            }
+
+            if (!hasAskedForFullscreen && isRunning && event.type === 'touchend' && frameElement.requestFullscreen)
+            {
+                hasAskedForFullscreen = true;
+
+                frameElement.requestFullscreen()
+                    .then(() => screen.orientation && screen.orientation.lock ? screen.orientation.lock('landscape') : null)
+                    .catch(() => {});
+            }
+        }
+
+        touchElement.addEventListener('touchend', onTouchEnd, { passive: false });
+        touchElement.addEventListener('touchcancel', onTouchEnd, { passive: false });
+    }
+
+    if (matchMedia('(hover: none) and (pointer: coarse)').matches)
+    {
+        setUpTouchControls();
+    }
 
     if (!navigator.gpu)
     {
