@@ -590,6 +590,43 @@ pre code {
   margin: 20px 0;
 }
 
+/* Samples */
+
+.samples {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.sample {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sample img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.sample h2 {
+  font-size: 18px;
+  margin: 14px 0 2px;
+}
+
+.section-intro .sample p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.sample:hover h2 { text-decoration: underline; }
+
 /* Footer */
 
 .site-footer {
