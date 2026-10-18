@@ -1,0 +1,26 @@
+{
+  "InstanceData.bin": {
+    "size": 249968,
+    "compressedSize": 156868
+  },
+  "Meshes.bin": {
+    "size": 29643637,
+    "compressedSize": 9086686
+  },
+  "RawData.bin": {
+    "size": 1310736,
+    "compressedSize": 257391
+  },
+  "Shaders.bin": {
+    "size": 10815373,
+    "compressedSize": 373610
+  },
+  "Textures.bin": {
+    "size": 39190824,
+    "compressedSize": 10218198
+  },
+  "toc.bin": {
+    "size": 81944,
+    "compressedSize": 16775
+  }
+}
