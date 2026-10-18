@@ -120,6 +120,20 @@
 
     #stick[hidden] { display: none; }
 
+    #stats {
+      position: absolute;
+      left: 8px;
+      top: 30%;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font: 12px/1.4 Consolas, monospace;
+      white-space: pre;
+      pointer-events: none;
+    }
+
+    #stats[hidden] { display: none; }
+
     #rotate-hint { display: none; }
 
     @media (orientation: portrait) {
@@ -151,6 +165,7 @@
         <div class="touch-hint right">Hold to boost</div>
         <div id="stick" hidden></div>
       </div>
+      <div id="stats" hidden></div>
       <div id="status">Loading content...</div>
     </div>
 
@@ -214,8 +229,12 @@
         'Rendering.GTAO=false',
         'Rendering.Clouds=false',
         'Rendering.FogVolumes=false',
+        'Rendering.Shadows.Enabled=false',
         'Rendering.Shadows.CSMMaxDistance=200',
-        'Rendering.Shadows.CSMMaxStaleFrames=16'
+        'Rendering.Shadows.CSMMaxStaleFrames=16',
+        'Rendering.Bloom=false',
+        'Rendering.DepthPrepass=false',
+        'Rendering.Decals=false'
     ];
 
     var Module = {
@@ -411,6 +430,28 @@
     if (isTouchDevice)
     {
         setUpTouchControls();
+    }
+
+    if (new URLSearchParams(location.search).has('stats'))
+    {
+        const statsElement = document.getElementById('stats');
+
+        const formatMs = (value) => value > 0 ? value.toFixed(1) : 'n/a';
+
+        setInterval(() => {
+            if (!isRunning || typeof Module['_HypWeb_GetFrameStats'] !== 'function')
+            {
+                return;
+            }
+
+            const [fps, frameMs, renderMs, simMs, gpuMs, shadowsMs] = Module.ccall('HypWeb_GetFrameStats', 'string', [], []).split(' ').map(parseFloat);
+
+            statsElement.textContent =
+                'fps ' + fps.toFixed(1) + '  frame ' + formatMs(frameMs) + ' ms\n' +
+                'cpu render ' + formatMs(renderMs) + '  sim ' + formatMs(simMs) + '\n' +
+                'gpu ' + formatMs(gpuMs) + '  shadows ' + formatMs(shadowsMs);
+            statsElement.hidden = false;
+        }, 500);
     }
 
     if (!navigator.gpu)
