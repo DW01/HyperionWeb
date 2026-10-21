@@ -133,12 +133,12 @@ body {
 
 .nav a.button-small:hover { color: #0b0d10; background: #fff; border-color: #fff; }
 
-.nav a.nav-github {
+.nav a.nav-icon {
   display: inline-flex;
   align-items: center;
 }
 
-.nav-github svg {
+.nav-icon svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
