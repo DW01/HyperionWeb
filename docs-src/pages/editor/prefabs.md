@@ -15,7 +15,7 @@ summary: Creating, placing and updating prefabs.
 
 The node you started with becomes an instance of your new prefab. It's marked with :icon[prefab] in the Scene panel.
 
-To create an empty prefab: **Assets › New... › Prefab**.
+To create an empty prefab: **Assets › Add... › Prefab**.
 
 ## Placing it
 
@@ -23,8 +23,10 @@ Drag the prefab from **Assets** into the viewport, or right-click it and pick **
 
 ## Making changes
 
-Tweak an instance, then right-click it and choose **Save Prefab** to update the prefab itself.
+Tweak an instance, then right-click it and choose **Sync Prefab** to update the prefab itself.
 
-To add nodes to an existing prefab, select them, right-click, and use **Add to Prefab**.
+To add nodes to an existing prefab, select them, right-click, and pick the prefab under **Add to Prefab**.
+
+To edit a prefab on its own, right-click an instance and choose **Edit Prefab**. The prefab opens in place of your scene; when you're done, pick **Exit Prefab Edit** from the dropdown at the top of the Scene panel.
 
 All of these actions can be undone.

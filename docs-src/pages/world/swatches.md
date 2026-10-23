@@ -15,8 +15,25 @@ Lightmaps and probes are baked per swatch, so each swatch has its own baked ligh
 
 The active swatch is shown in the toolbar, next to :icon[roller]. Add one with **New Swatch...** in that menu and make it active.
 
-With **Override Edits** on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.
+With **Override Edits** on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well. The toggle only shows while a swatch other than *Default* is active.
 
-::: note
-Missing info on this page on how to dynamically set the World's active Swatch from scripts
+The Inspector's **Swatch Overrides** section shows what the active swatch overrides on the selected entity, and can reset overrides or copy them from another swatch.
+
+## From code
+
+Switch swatches with `SetActiveSwatch` on the world. It re-applies the swatch's overrides and baked lighting, and the active swatch is saved with the world.
+
+::: tabs
+```cpp
+world->SetActiveSwatch(NAME("Dusk"));
+```
+
+```csharp
+world.SetActiveSwatch(new Name("Dusk"));
+```
 :::
+
+From the [console](/docs/editor/console.html):
+`setswatch --swatch=Dusk`
+
+`GetSwatchNames()` lists them, `GetActiveSwatchName()` returns the current one, and `OnActiveSwatchChanged` fires when it changes.

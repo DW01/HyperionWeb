@@ -7,6 +7,10 @@ summary: How engine types show up in Strata and C#, and how to expose your own.
 
 ## The engine API
 
+::: note
+Strata is temporarily disabled in current builds, so the Strata examples here aren't applicable yet - the C# ones work as shown
+:::
+
 In Strata, `import Engine;` pulls in the generated bindings: handles for engine types, their methods, plus structs and enums. They're written to `Data/Scripts/Strata/Engine.strata` when you build, which is the quickest way to see what's available.
 
 In C#, `using Hyperion;` brings in the engine's C# classes. Their methods come from extension methods that CodeGen writes to `Source/Generated/CSharp/`.
@@ -53,7 +57,7 @@ The next CodeGen run generates roughly this for each language:
 
 ::: tabs
 ```strata
-handle Door extends Entity;
+handle Door : Entity;
 
 impl Door
 {

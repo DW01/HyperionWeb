@@ -67,6 +67,7 @@
         <li><a href="/docs/platforms/" aria-current="page">Platforms</a>
           <ul>
             <li><a href="/docs/platforms/packaging.html">Packaging a build</a></li>
+            <li><a href="/docs/platforms/web.html">Web</a></li>
             <li><a href="/docs/platforms/android.html">Android</a></li>
             <li><a href="/docs/platforms/ios.html">iOS</a></li>
           </ul>
@@ -92,11 +93,15 @@
 <tbody>
 <tr>
 <td>Windows (x64, ARM64)</td>
-<td>Yes. Runtime and editor.</td>
+<td>Yes. Runtime and editor. DirectX 12 by default, or Vulkan.</td>
 </tr>
 <tr>
 <td>macOS</td>
 <td>Yes. Runtime and editor.</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>Yes, through WebAssembly and WebGPU. Runtime only, built from the Windows editor.</td>
 </tr>
 <tr>
 <td>Android</td>
@@ -117,18 +122,55 @@
 </tbody>
 </table>
 </div>
-<p>Linux is planned, but not in active development. <a href="/docs/contributing/">Contributions</a> are welcome on this front (as well as anywhere else)</p>
+<p>The engine compiles on Linux with GCC, but it isn't a supported platform yet. <a href="/docs/contributing/">Contributions</a> are welcome on this front (as well as anywhere else)</p>
 <h2 id="in-this-section">In this section</h2>
 <ul class="docs-links">
   <li><a href="/docs/platforms/packaging.html">Packaging a build</a><span>Build a standalone copy of your game to distribute.</span></li>
+  <li><a href="/docs/platforms/web.html">Web</a><span>Build your game for the browser.</span></li>
   <li><a href="/docs/platforms/android.html">Android</a><span>Building and installing on Android devices.</span></li>
   <li><a href="/docs/platforms/ios.html">iOS</a><span>Build for iPhone and iPad through Xcode.</span></li>
 </ul>
 <h2 id="steam-deck">Steam Deck</h2>
 <p>There's no native Linux build yet, so on the Deck you run the Windows build through Proton. Controller input and resolution handling still need work here</p>
 <h2 id="per-platform-settings">Per-platform settings</h2>
-<p>Each platform can have its own config, like <code>Config/EngineConfig.Android.json</code>. If a platform file exists it <em>replaces</em> the regular one, rather than merging with it, so it needs every setting.</p>
+<p>Each platform can have its own config, like <code>Config/EngineConfig.Android.json</code> or <code>Config/GlobalConfig.Web.json</code>. If a platform file exists it <em>replaces</em> the regular one, rather than merging with it, so it needs every setting.</p>
 <p>The mobile configs, for example, turn off ray tracing, DDGI, SSGI and TAA.</p>
+<h2 id="device-tiers">Device tiers</h2>
+<p>On top of the config, <code>Config/DeviceTiers.hmf</code> has rules that change settings for the device the game is running on. Each rule matches on any of:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Axis</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeviceType</td>
+<td>Desktop, Laptop, Mobile</td>
+</tr>
+<tr>
+<td>DevicePlatform</td>
+<td>Windows, MacOS, Linux, Android, IOS, Web</td>
+</tr>
+<tr>
+<td>DeviceGrade</td>
+<td>Low, Medium, High, Ultra</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>and overrides the <code>EngineConfig</code> settings it lists. <code>When</code> matches exact values, and <code>AtMost</code> matches a grade or anything below it:</p>
+<pre><code>TierRule &quot;Web&quot; {
+    When = { DevicePlatform = Web }
+    Set = {
+        &quot;Rendering.Glimmer.Probes.Enabled&quot; = false
+    }
+}
+</code></pre>
+<p>The Mobile rule, for example, turns off Glimmer, SSR, clouds, fog volumes, shadows and bloom.</p>
+<p>To test another tier, force an axis from the command line with <code>--devicetype</code>, <code>--deviceplatform</code> or <code>--devicegrade</code>, like <code>--devicegrade=Low</code>.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/multiplayer/replication.html"><span>Previous</span>Replication &amp; prediction</a><a class="next" href="/docs/platforms/packaging.html"><span>Next</span>Packaging a build</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/platforms/index.md" rel="noopener">Improve this page on GitHub</a></p>
@@ -141,6 +183,7 @@
         <li><a href="#in-this-section">In this section</a></li>
         <li><a href="#steam-deck">Steam Deck</a></li>
         <li><a href="#per-platform-settings">Per-platform settings</a></li>
+        <li><a href="#device-tiers">Device tiers</a></li>
       </ul>
     </aside>
   </div>

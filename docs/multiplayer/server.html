@@ -83,13 +83,15 @@
 <p>The game executable runs as a server with <code>--server</code>:</p>
 <pre><code class="language-shell">hyperion-sample --server --gameport=9192
 </code></pre>
-<p>It runs headless (no window), and reads console commands from its terminal. Leave off <code>--gameport</code> and it uses the <code>Net.GameServerPort</code> CVar, which defaults to 9192.</p>
+<p>It runs headless (no window), and reads console commands from its terminal. Leave off <code>--gameport</code> and it uses the <code>Net.GameServerPort</code> CVar, which defaults to 9192. A headless server ticks at up to 60 times a second, set with <code>Sim.HeadlessTickRate</code>.</p>
+<p>Add <code>--startupworld=&lt;WorldName&gt;</code> to pick the world it starts in.</p>
 <h2 id="connect-a-client">Connect a client</h2>
-<p>Run the game executable with <code>--host</code> and <code>--autoconnect=true</code> cli args to automatically connect to a host at that address. If you don't pass <code>autoconnect</code> or pass it as <code>false</code>, a prompt screen will be shown that will allow your to change it before connecting or select Single Player instead (NOTE: to be changed - will automatically connect if --host is passed)</p>
-<pre><code class="language-shell">hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
+<p>Run the game executable with <code>--host</code> to connect to the server at that address:</p>
+<pre><code class="language-shell">hyperion-sample --host=127.0.0.1 --gameport=9192
 </code></pre>
+<p>With <code>--autoconnect=false</code>, or without <code>--host</code>, it shows a screen where you can change the address before connecting, or pick Single Player instead.</p>
 <h2 id="your-own-game">Your own game</h2>
-<p>A game <a href="/docs/editor/build-game.html">built from the editor</a> takes the same flags. It starts in single player by default, unless <code>--singleplayer=false</code> is passed.</p>
+<p>A game <a href="/docs/editor/build-game.html">built from the editor</a> takes the same flags. It starts in single player by default, because its <code>Config/GlobalConfig.json</code> passes <code>--singleplayer</code>. Pass <code>--singleplayer=false</code> to override it.</p>
 <p>For example:</p>
 <pre><code class="language-shell">MyGame --server # start standalone a server
 MyGame --singleplayer=false --host=127.0.0.1 # connect to a server

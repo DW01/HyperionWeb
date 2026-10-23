@@ -84,8 +84,7 @@
 <h2 id="what-you-ll-need">What you'll need</h2>
 <p>On every platform:</p>
 <ul>
-<li><strong>CMake</strong> 3.10 or newer.</li>
-<li><strong>Vulkan SDK</strong>. Vulkan is our main rendering backend. On Apple platforms it comes with MoltenVK, which translates Vulkan to Metal for us.</li>
+<li><strong>CMake</strong> 3.27 or newer.</li>
 <li><strong>.NET SDK</strong>, with <code>dotnet</code> on your PATH. The editor UI is built with Avalonia on .NET 10, so the editor needs it.</li>
 </ul>
 <p>Per platform:</p>
@@ -104,11 +103,15 @@
 </tr>
 <tr>
 <td>macOS</td>
-<td><code>brew install molten-vk</code>, or run <code>Tools/Scripts/InstallDependenciesMac.sh</code>.</td>
+<td>The <strong>Vulkan SDK</strong>, plus <code>brew install molten-vk</code> (or run <code>Tools/Scripts/InstallDependenciesMac.sh</code>). MoltenVK translates Vulkan to Metal for us.</td>
 </tr>
 <tr>
 <td>Android</td>
-<td>The Android NDK (we test with NDK 29), and Ninja on your PATH.</td>
+<td>The Android NDK (we test with NDK 29), and Ninja on your PATH. See <a href="/docs/platforms/android.html">Android</a>.</td>
+</tr>
+<tr>
+<td>Web</td>
+<td><a href="https://emscripten.org/docs/getting_started/downloads.html" rel="noopener">emsdk</a> with the <code>EMSDK</code> environment variable pointing at it, and Ninja on your PATH.</td>
 </tr>
 </tbody>
 </table>
@@ -119,14 +122,52 @@
 <pre><code class="language-shell">build.bat Release
 </code></pre>
 <p>To build with Clang instead of MSVC: <code>build.bat Release Clang</code></p>
+<p>On Windows the default rendering backend is DirectX 12. To build with Vulkan instead, add <code>Vulkan</code> (<code>build.bat Release Vulkan</code>); that needs the <strong>Vulkan SDK</strong> installed, with <code>VULKAN_SDK</code> set.</p>
 <h3 id="macos">macOS</h3>
 <pre><code class="language-shell">./build.sh Release
 </code></pre>
 <p>To generate an Xcode project: <code>./build.sh Xcode Release</code></p>
 <div class="docs-note">
-<p>The script asks if you want to regenerate the CMake project first, and moves on without it after 3 seconds. Answer yes if you've added or removed source files.</p>
+<p>The script asks if you want to regenerate the CMake project first, and moves on without it after 3 seconds. Answer yes if you've added or removed source files. Pass <code>Regenerate</code> to always regenerate, or <code>NoWait</code> to skip the question.</p>
 </div>
 <p>Use <strong>Release</strong> (or RelWithDebInfo) on Windows. Debug builds work, but run very slowly.</p>
+<h3 id="other-options">Other options</h3>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Shipping</code></td>
+<td>An optimized build without the editor, tests or commandlets. See <a href="/docs/platforms/packaging.html#about-shipping-builds">packaging</a>.</td>
+</tr>
+<tr>
+<td><code>Runtime</code></td>
+<td>The engine without the editor (.NET stays on, for C# games). Goes to <code>Binaries/&lt;Platform&gt;-Runtime/</code>.</td>
+</tr>
+<tr>
+<td><code>Android</code></td>
+<td>Builds for Android.</td>
+</tr>
+<tr>
+<td><code>Web</code></td>
+<td>Builds for the browser (WebAssembly and WebGPU).</td>
+</tr>
+<tr>
+<td><code>ARM64</code></td>
+<td>Builds for Windows on ARM. Needs the <strong>C++ Clang tools for Windows</strong> Visual Studio component.</td>
+</tr>
+<tr>
+<td><code>Ninja</code></td>
+<td>Uses Ninja and clang-cl instead of a Visual Studio solution.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="codegen">CodeGen</h2>
 <p>CodeGen is a build tool that reads the engine's headers and generates the reflection, serialization and scripting bindings. It runs automatically when CMake configures, so you don't normally run it yourself.</p>
 <p>Its output goes into <code>Source/Generated/</code>. Don't edit those files by hand; they're overwritten on every run.</p>
@@ -134,13 +175,15 @@
 <p>Build output goes to <code>Binaries/&lt;Platform&gt;/&lt;Config&gt;/</code>, for example <code>Binaries/Windows/Release/</code> or <code>Binaries/Mac/Release/</code>. The main executables are:</p>
 <ul>
 <li><code>Hyperion.Editor</code> (<code>.exe</code> on Windows), the editor.</li>
-<li><code>hyperion-sample</code> (<code>.exe</code> on Windows), the sample game.</li>
+<li><code>hyperion-sample</code> (<code>.exe</code> on Windows), the C++ sample game.</li>
+<li><code>CSharpGame</code> (<code>.exe</code> on Windows), the C# sample game.</li>
 </ul>
+<p>Commandlets like <code>PrecompileShaders</code> land in the same folder. See <a href="/docs/editor/console.html#commandlets">Console &amp; CVars</a>.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <ul>
 <li><strong>&quot;VCPKG_ROOT not set&quot;</strong>: Windows builds need it. Point it at your vcpkg install, then open a new terminal.</li>
 <li><strong>CMake fails with CodeGen errors</strong>: run <code>Tools/Scripts/BuildCodeGen.bat</code> (or <code>.sh</code>) on its own to see what actually went wrong.</li>
-<li><strong>Metal API validation errors on macOS</strong>: turn off &quot;Metal API Validation&quot; in your Xcode scheme, under the Options tab. Rendering goes through MoltenVK, which the validator reports false errors for.</li>
+<li><strong>Metal API validation errors on macOS</strong>: the generated Xcode project turns Metal API Validation off for you. If you've made your own scheme, turn it off under the Options tab. Rendering goes through MoltenVK, which the validator reports false errors for.</li>
 </ul>
 <p>The full <a href="https://github.com/HyperionGameTech/HyperionEngine/blob/dev/Documentation/CompilingTheEngine.md" rel="noopener">Compiling the Engine</a> guide in the repo covers Android, optional dependencies and IDE setup.</p>
       </article>

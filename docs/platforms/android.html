@@ -67,6 +67,7 @@
         <li><a href="/docs/platforms/">Platforms</a>
           <ul>
             <li><a href="/docs/platforms/packaging.html">Packaging a build</a></li>
+            <li><a href="/docs/platforms/web.html">Web</a></li>
             <li><a href="/docs/platforms/android.html" aria-current="page">Android</a></li>
             <li><a href="/docs/platforms/ios.html">iOS</a></li>
           </ul>
@@ -85,32 +86,31 @@
 <li>The <strong>Android NDK</strong>. We test with NDK 29. Point <code>ANDROID_NDK_HOME</code> at it.</li>
 <li><strong>Ninja</strong>, on your PATH or installed with Visual Studio or the Android SDK.</li>
 <li>The <strong>Android SDK</strong> and <strong>Java 17</strong>, for Gradle. Android Studio installs both.</li>
+<li>A regular Windows <strong>Release</strong> build of the engine (<code>build.bat Release</code>). Packaging uses its shader and cooking tools.</li>
 </ul>
 <p>We build for 64-bit ARM (<code>arm64-v8a</code>), and you'll need Android 9 (API 28) or newer.</p>
 <h2 id="build-it">Build it</h2>
 <ol class="steps">
 <li>
-<p>Build the engine for Android. The libraries end up in <code>Binaries/Android/Release/</code>.</p>
-<pre><code class="language-shell">build.bat Android Release
-</code></pre>
-</li>
-<li>
-<p>Package it with your project's content:</p>
+<p>Build the engine for Android and package it with your project's content:</p>
 <pre><code class="language-shell">Tools\Scripts\PackageBuildAndroid.bat --cook --project MyGame
 </code></pre>
-<p>Without <code>--cook</code>, only engine content is included.</p>
+<p>This makes its own shipping build for Android, so you don't need to run <code>build.bat Android</code> first. <code>--project</code> is the project's folder name under <code>Projects/</code>. Without <code>--cook</code>, only engine content is included. <code>--skip-precompile</code> skips precompiling shaders.</p>
+<p>The package lands in <code>PackagedBuilds/Android/Build_&lt;date&gt;_&lt;time&gt;/</code>.</p>
 </li>
 <li>
 <p>Build and install the APK with Gradle, from <code>Source/PlatformSpecific/Android/</code>:</p>
 <pre><code class="language-shell">gradlew.bat installDebug
 </code></pre>
-<p>You can also open that folder in Android Studio and run it from there.</p>
+<p>Gradle picks up the last package automatically. You can also open that folder in Android Studio and run it from there.</p>
 </li>
 </ol>
+<p>To build only the engine libraries, without packaging: <code>build.bat Android Release</code>. They end up in <code>Binaries/Android/Release/</code>.</p>
 <h2 id="settings">Settings</h2>
-<p>Android uses <code>Config/EngineConfig.Android.json</code> instead of the regular config with platform-specific overrides for targeting lower end devices than the typical desktop experience</p>
+<p>Android uses <code>Config/EngineConfig.Android.json</code> instead of the regular config with platform-specific overrides for targeting lower end devices than the typical desktop experience.</p>
+<p>The Mobile <a href="/docs/platforms/#device-tiers">device tier</a> rule applies on top of it.</p>
       </article>
-      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/packaging.html"><span>Previous</span>Packaging a build</a><a class="next" href="/docs/platforms/ios.html"><span>Next</span>iOS</a></nav>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/web.html"><span>Previous</span>Web</a><a class="next" href="/docs/platforms/ios.html"><span>Next</span>iOS</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/platforms/android.md" rel="noopener">Improve this page on GitHub</a></p>
     </main>
 

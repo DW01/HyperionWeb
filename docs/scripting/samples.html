@@ -80,51 +80,24 @@
         <h1>Samples</h1>
 
 
-<div class="docs-note">
-<p>This page is out of date!</p>
-</div>
-<p>To try one of these - create a script in the sample's language (<strong>Inspector &gt; Script &gt;</strong> <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 1.5C8 1.22386 7.77614 1 7.5 1C7.22386 1 7 1.22386 7 1.5V7H1.5C1.22386 7 1 7.22386 1 7.5C1 7.77614 1.22386 8 1.5 8H7V13.5C7 13.7761 7.22386 14 7.5 14C7.77614 14 8 13.7761 8 13.5V8H13.5C13.7761 8 14 7.77614 14 7.5C14 7.22386 13.7761 7 13.5 7H8V1.5Z"/></svg>), paste the sample in, and save it</p>
+<p>To try one of these - create a script in the sample's language (<strong>Inspector › Script ›</strong> <strong>Create New Script</strong>), paste the sample in, and save it</p>
 <h2 id="health-component">Health component</h2>
 <p>A custom component that drains over time. C# only (for now).</p>
 <div class="docs-tabs">
-<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-5-csharp-tab" aria-controls="tabs-5-csharp" aria-selected="true" tabindex="0" data-lang="csharp">C#</button></div>
-<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-5-csharp" aria-labelledby="tabs-5-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">using Hyperion;
-using System;
-using System.Runtime.InteropServices;
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-6-csharp-tab" aria-controls="tabs-6-csharp" aria-selected="true" tabindex="0" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-6-csharp" aria-labelledby="tabs-6-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">using Hyperion;
 
-[StructLayout(LayoutKind.Sequential)]
 public struct Health : IComponent
 {
     public float Current;
     public float Max;
-
-    public void Dispose()
-    {
-    }
-
-    public static Class Class =&gt; Class.GetClass(typeof(Health));
-
-    public unsafe IntPtr NativeAddress
-    {
-        get
-        {
-            fixed (Health* pThis = &amp;this)
-            {
-                return (IntPtr)pThis;
-            }
-        }
-    }
 }
 
 public class NewScript : Script
 {
-    private Entity? entity;
-
     public override void OnAdded(Entity entity)
     {
-        this.entity = entity;
-
-        ComponentRegistry.RegisterComponent&lt;Health&gt;();
+        base.OnAdded(entity);
 
         Health health = new Health { Current = 100, Max = 100 };
         entity.AddComponent&lt;Health&gt;(ref health);
@@ -132,20 +105,10 @@ public class NewScript : Script
 
     public override void Update(float deltaTime)
     {
-        if (this.entity == null)
-        {
-            return;
-        }
-
-        ref Health health = ref this.entity.GetComponent&lt;Health&gt;();
+        ref Health health = ref Entity.GetComponent&lt;Health&gt;();
         health.Current -= deltaTime;
 
         Logger.Log(LogLevel.Info, $&quot;Entity health: {health.Current}&quot;);
-    }
-
-    public override void Destroy()
-    {
-        this.entity = null;
     }
 }
 </code></pre></div>
@@ -160,8 +123,8 @@ public class NewScript : Script
 </thead>
 <tbody>
 <tr>
-<td><code>RegisterComponent&lt;Health&gt;()</code></td>
-<td>Registers the struct as a component type</td>
+<td><code>IComponent</code></td>
+<td>Marks the struct as a component type. It's registered when the script loads.</td>
 </tr>
 <tr>
 <td><code>AddComponent(ref health)</code></td>
@@ -174,10 +137,8 @@ public class NewScript : Script
 </tbody>
 </table>
 </div>
-<p>Component structs must be blittable: plain fields, sequential layout.</p>
-<div class="docs-note">
-<p><code>RegisterComponent</code> throws if the type is already registered, so if several entities use this script, register it once.</p>
-</div>
+<p>Component structs must be blittable: plain value fields, no classes, strings or arrays.</p>
+<p>By default, a component is saved with the scene and shown in the editor. To change that, add <code>[Component(Flags = ...)]</code> to the struct, with any of <code>ComponentFlags.Serialize</code>, <code>ComponentFlags.ShowInEditor</code> and <code>ComponentFlags.Replicated</code>.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/engine-bindings.html"><span>Previous</span>Calling engine code</a><a class="next" href="/docs/rendering/"><span>Next</span>Rendering &amp; lighting</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/scripting/samples.md" rel="noopener">Improve this page on GitHub</a></p>

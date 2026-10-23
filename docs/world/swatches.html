@@ -86,10 +86,20 @@
 <p>Lightmaps and probes are baked per swatch, so each swatch has its own baked lighting rather than relying on realtime lighting when the time of day changes.</p>
 <h2 id="in-the-editor">In the editor</h2>
 <p>The active swatch is shown in the toolbar, next to <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M600-40H440q-17 0-28.5-11.5T400-80v-240q0-17 11.5-28.5T440-360h40v-120H160q-33 0-56.5-23.5T80-560v-160q0-33 23.5-56.5T160-800h80v-40q0-17 11.5-28.5T280-880h480q17 0 28.5 11.5T800-840v160q0 17-11.5 28.5T760-640H280q-17 0-28.5-11.5T240-680v-40h-80v160h320q33 0 56.5 23.5T560-480v120h40q17 0 28.5 11.5T640-320v240q0 17-11.5 28.5T600-40Zm-120-80h80v-160h-80v160ZM320-720h400v-80H320v80Zm160 600h80-80ZM320-720v-80 80Z"/></svg>. Add one with <strong>New Swatch...</strong> in that menu and make it active.</p>
-<p>With <strong>Override Edits</strong> on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well.</p>
-<div class="docs-note">
-<p>Missing info on this page on how to dynamically set the World's active Swatch from scripts</p>
+<p>With <strong>Override Edits</strong> on, changes you make are saved as overrides for the active swatch. With it off, they apply to the base as well. The toggle only shows while a swatch other than <em>Default</em> is active.</p>
+<p>The Inspector's <strong>Swatch Overrides</strong> section shows what the active swatch overrides on the selected entity, and can reset overrides or copy them from another swatch.</p>
+<h2 id="from-code">From code</h2>
+<p>Switch swatches with <code>SetActiveSwatch</code> on the world. It re-applies the swatch's overrides and baked lighting, and the active swatch is saved with the world.</p>
+<div class="docs-tabs">
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-1-cpp-tab" aria-controls="tabs-1-cpp" aria-selected="true" tabindex="0" data-lang="cpp">C++</button><button type="button" role="tab" id="tabs-1-csharp-tab" aria-controls="tabs-1-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-1-cpp" aria-labelledby="tabs-1-cpp-tab" data-lang="cpp"><pre><code class="language-cpp">world-&gt;SetActiveSwatch(NAME(&quot;Dusk&quot;));
+</code></pre></div>
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-1-csharp" aria-labelledby="tabs-1-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">world.SetActiveSwatch(new Name(&quot;Dusk&quot;));
+</code></pre></div>
 </div>
+<p>From the <a href="/docs/editor/console.html">console</a>:
+<code>setswatch --swatch=Dusk</code></p>
+<p><code>GetSwatchNames()</code> lists them, <code>GetActiveSwatchName()</code> returns the current one, and <code>OnActiveSwatchChanged</code> fires when it changes.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/world/streaming.html"><span>Previous</span>World streaming</a><a class="next" href="/docs/scripting/"><span>Next</span>Scripting</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/world/swatches.md" rel="noopener">Improve this page on GitHub</a></p>
@@ -100,6 +110,7 @@
       <ul>
         <li><a href="#high-level-overview">High level overview.</a></li>
         <li><a href="#in-the-editor">In the editor</a></li>
+        <li><a href="#from-code">From code</a></li>
       </ul>
     </aside>
   </div>

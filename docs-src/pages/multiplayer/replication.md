@@ -26,6 +26,7 @@ Updates don't arrive every frame, so clients render slightly behind and interpol
 | Net.InterpolationEnabled | Turns interpolation on or off. |
 | Net.InterpolationDelay | How far behind to stay, in seconds. Starts at 0.1. |
 | Net.DeadReckoning | Turns dead reckoning on or off. |
+| Net.InterpRatio | Stays at least this many update intervals behind, if that's more than `Net.InterpolationDelay`. Starts at 2. |
 
 ## Client-side prediction
 
@@ -39,7 +40,7 @@ The local player's movement is predicted:
 3. The client compares that with its prediction and corrects any difference.
 :::
 
-If the client and server end up too far apart (more than `Net.CorrectionThreshold`), the client smoothly corrects over `Net.CorrectionSmoothingTime`.
+When they disagree, the client rewinds to the server's position, replays the moves the server hasn't acknowledged yet, and smooths out the difference over at least `Net.CorrectionSmoothingTime` (0.1 seconds to start). If they're more than `Net.CorrectionThreshold` apart (4 units to start), it's treated as a teleport and snaps straight there.
 
 ## Authority
 
@@ -47,4 +48,4 @@ The server has authority. So does a game that isn't connected to anything, like 
 
 ## Not yet supported
 
-There are no RPCs yet, and you can't replicate individual properties. Replication currently covers whole entities and their transforms.
+There are no RPCs yet, and you can't replicate individual properties or components. Replication currently covers which entities exist (their class, name, parent and scene) and their transforms.

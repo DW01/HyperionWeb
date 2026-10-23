@@ -81,16 +81,19 @@
         <p class="lede">Scripts call into the engine through bindings that CodeGen generates from reflected C++ types, for both Strata and C#.</p>
 
 <h2 id="the-engine-api">The engine API</h2>
+<div class="docs-note">
+<p>Strata is temporarily disabled in current builds, so the Strata examples here aren't applicable yet - the C# ones work as shown</p>
+</div>
 <p>In Strata, <code>import Engine;</code> pulls in the generated bindings: handles for engine types, their methods, plus structs and enums. They're written to <code>Data/Scripts/Strata/Engine.strata</code> when you build, which is the quickest way to see what's available.</p>
 <p>In C#, <code>using Hyperion;</code> brings in the engine's C# classes. Their methods come from extension methods that CodeGen writes to <code>Source/Generated/CSharp/</code>.</p>
 <h2 id="calling-methods">Calling methods</h2>
 <p>Methods are called with dot syntax. Methods from parent types work too, so an <code>Entity</code> can do anything a <code>Node</code> can:</p>
 <div class="docs-tabs">
-<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-3-strata-tab" aria-controls="tabs-3-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-3-csharp-tab" aria-controls="tabs-3-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
-<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-3-strata" aria-labelledby="tabs-3-strata-tab" data-lang="strata"><pre><code class="language-strata">float3 position = g_entity.GetWorldTranslation();
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-4-strata-tab" aria-controls="tabs-4-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-4-csharp-tab" aria-controls="tabs-4-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-4-strata" aria-labelledby="tabs-4-strata-tab" data-lang="strata"><pre><code class="language-strata">float3 position = g_entity.GetWorldTranslation();
 g_entity.Translate(float3(1.0, 0.0, 0.0));
 </code></pre></div>
-<div class="docs-tabs-panel" role="tabpanel" id="tabs-3-csharp" aria-labelledby="tabs-3-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">Vec3f position = Entity.GetWorldTranslation();
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-4-csharp" aria-labelledby="tabs-4-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">Vec3f position = Entity.GetWorldTranslation();
 Entity.Translate(new Vec3f(1.0f, 0.0f, 0.0f));
 </code></pre></div>
 </div>
@@ -114,8 +117,8 @@ public:
 </code></pre>
 <p>The next CodeGen run generates roughly this for each language:</p>
 <div class="docs-tabs">
-<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-4-strata-tab" aria-controls="tabs-4-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-4-csharp-tab" aria-controls="tabs-4-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
-<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-4-strata" aria-labelledby="tabs-4-strata-tab" data-lang="strata"><pre><code class="language-strata">handle Door extends Entity;
+<div class="docs-tabs-bar" role="tablist" aria-label="Language"><button type="button" role="tab" id="tabs-5-strata-tab" aria-controls="tabs-5-strata" aria-selected="true" tabindex="0" data-lang="strata">Strata</button><button type="button" role="tab" id="tabs-5-csharp-tab" aria-controls="tabs-5-csharp" aria-selected="false" tabindex="-1" data-lang="csharp">C#</button></div>
+<div class="docs-tabs-panel is-active" role="tabpanel" id="tabs-5-strata" aria-labelledby="tabs-5-strata-tab" data-lang="strata"><pre><code class="language-strata">handle Door : Entity;
 
 impl Door
 {
@@ -126,7 +129,7 @@ impl Door
     property bool Locked { get = Door_IsLocked; set = Door_SetLocked; }
 }
 </code></pre></div>
-<div class="docs-tabs-panel" role="tabpanel" id="tabs-4-csharp" aria-labelledby="tabs-4-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">public static class DoorExtensions
+<div class="docs-tabs-panel" role="tabpanel" id="tabs-5-csharp" aria-labelledby="tabs-5-csharp-tab" data-lang="csharp"><pre><code class="language-csharp">public static class DoorExtensions
 {
     public static void Open(this Door obj) { ... }
     public static bool IsLocked(this Door obj) { ... }

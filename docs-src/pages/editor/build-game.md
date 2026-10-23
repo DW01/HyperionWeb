@@ -15,8 +15,12 @@ summary: Generate a C++ or C# project, build it, and run your game outside the e
 | Item | What it does |
 |---|---|
 | Generate Game Project... | Adds a C# or C++ project to your project folder. Once it exists, this becomes **Open C# Project Folder** or **Open C++ Project Folder**. |
+| Change Language... | Switches the project between C# and C++. Only applicable when source files haven't been changed. |
 | Build Game | Compiles that project into a game executable. |
+| Reload Game | Loads the latest build of your C++ game into the editor. See [In the editor](#in-the-editor). |
 | Package Game | Makes a standalone copy of the game to share. See [Packaging a build](/docs/platforms/packaging.html). |
+| Package for Web | Builds the game for the browser. See [Web](/docs/platforms/web.html). |
+| Packaging Settings... | Settings for packaged builds - see [Packaging settings](/docs/platforms/packaging.html#packaging-settings). |
 
 This page covers C++; switch to C# at the top of the page.
 
@@ -58,8 +62,6 @@ void MyGameGame::OnLaunch()
     Game::OnLaunch();
 
     HYP_LOG(Game, Info, "MyGameGame launched");
-
-    StartSimulating();
 }
 
 void MyGameGame::OnUpdate(float delta)
@@ -127,10 +129,13 @@ The single player default comes from `Binaries/Windows/Config/GlobalConfig.json`
 
 Once the game is built, the editor loads `MyGameGame.dll` when it opens your project, and [play-in-editor](/docs/editor/play-in-editor.html) runs your `Game` class.
 
-:::note
-There's no hot reload for C++. You can rebuild while the project is open, but the editor keeps using the build it loaded until you restart it.
-:::
+### Hot reload
+
+You can rebuild while the project is open. When `MyGameGame.dll` changes, the editor loads the new build by itself, whether you built from the editor, Visual Studio or `Build.bat`.
+
+To force a reload, use **Build › Reload Game**. Either way, it waits until you stop playing, and Play always runs the newest build.
 
 ::: note
-A project that's been saved with your `Game` class needs its built game to open. If the editor reports that the game module isn't built, run `Build/Windows/Build.bat` in the project folder, then open the project again.
+To turn the automatic reload off, set the `Editor.AutoReloadGameModule` CVar to `false`.
 :::
+

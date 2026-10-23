@@ -7,20 +7,23 @@ summary: PBR parameters, texture slots and buckets.
 
 ## Making one
 
-In the **Assets** panel, hit **New... › Material**, then open it to edit. Materials are saved as `.hmf` files in your project's `Materials/` folder.
+In the **Assets** panel, hit **Add... › Material**, then open it to edit. It goes in the folder you're browsing. On disk, materials are saved as `.hmf` files in your project's `Content/Materials/` folder.
 
 ## Parameters
 
 | Parameter | What it does |
 |---|---|
 | Albedo | The base color. White by default. |
-| Roughness | 0 == perfect mirror, 1 == completely rough surface. As with most things in life, the truth lies somewhere in between. |
-| Metalness | How metallic the surface is, generally you want 0 or 1 for this |
-| Emissive | A color and an intensity, for things that glow. _NOTE! This is not fully supported in the engine at this point, but lightmap baking will use this to treat a surface as somehting that emits light_ |
+| Roughness | 0 == perfect mirror, 1 == completely rough surface. As with most things in life, the truth lies somewhere in between. 1 by default. |
+| Metalness | How metallic the surface is, generally you want 0 or 1 for this. 0 by default. |
+| Emissive color, intensity | A color and an intensity, for things that glow. _NOTE! This is not fully supported in the engine at this point, but lightmap baking will use this to treat a surface as somehting that emits light_ |
 | Alpha threshold | Discards pixels for anything with alpha below this value |
 | Transmission, IOR | For transparent materials like glass. IOR starts at 1.5. |
 | UV scale | Scales how much the UV coordinates of your mesh repeat: if your textures are stretched across the surface, increase it; too much will cause visible tiling with your textures |
 | Unlit | Skips lighting entirely |
+| Parallax height scale | How deep the parallax map goes. 0.02 by default. |
+
+There are more for foliage and terrain, such as wind, color variation and blending normals with the ground.
 
 ## Textures
 

@@ -5,6 +5,10 @@ lede: Packaging turns your project into a standalone build you can distribute.
 summary: Build a standalone copy of your game to distribute.
 ---
 
+The examples on this page describe how to package your game and run it on Windows, but other platforms are nearly the same.
+
+For macOS/Linux, use the bash scripts where batch scripts would be used. For example, `build.bat` becomes `build.sh`. For executables, (`MyGame.exe`), use `MyGame` (no extension).
+
 ## What packaging does
 
 - **Cooks** your project's content, and the engine's, into a compact cache.
@@ -25,6 +29,7 @@ This packages the game you built with [Build Game](/docs/editor/build-game.html)
 
 The editor saves your project and will begin packaging your game.
 
+
 ![The Packaging Game progress box](/assets/docs-package-progress.png)
 
 When it's done, your file browser will open at the output directory.
@@ -32,12 +37,13 @@ When it's done, your file browser will open at the output directory.
 Example structure:
 ```
 MyGame/
-  MyGame.exe
-  MyGameGame.dll
-  hyperion.dll
-  Cache/
-  Content/
-  Config/
+  Packaged/Build_20261022_153000/
+    MyGame.exe
+    MyGameGame.dll
+    hyperion.dll
+    Cache/
+    Content/
+    Config/
 ```
 
 Run `MyGame.exe` to start your game.
@@ -51,6 +57,24 @@ Run `MyGame.exe` to start your game.
 | Config | Engine settings, and the game's launch arguments in `GlobalConfig.json` |
 
 The game starts in the world you had open when you packaged it, in single player. Both are set in `Config/GlobalConfig.json`.
+
+A C# game is compiled ahead of time with NativeAOT, so the package runs on a machine without .NET installed.
+
+To package this, you need the .NET 10 SDK, and on Windows, Visual Studio or the Build Tools with the **Desktop development with C++** workload.
+
+::: note
+Packaging from the editor builds for the platform the editor is running on. For the browser, use **Build › Package for Web**. See [Web](/docs/platforms/web.html).
+:::
+
+### Packaging settings
+
+**Build › Packaging Settings...** has settings for the cook, saved with your project:
+
+| Setting | What it does |
+|---|---|
+| Max Texture Size | The largest texture dimension in the cooked game. Bigger textures are scaled down. 0 means no limit. |
+
+**Defaults** apply everywhere. Use **Platform Override** to change a setting for one platform; anything you don't override follows the defaults. New projects start with overrides for the web (256), iOS (512) and Android (512).
 
 ### Multiplayer
 
@@ -73,7 +97,7 @@ The scripts in the engine repo make a **shipping** build (optimized, no editor, 
    build.bat Release
    ```
 
-2. Run the packaging script from the root of the repo:
+2. Run the packaging script from the root of the repo. It makes its own shipping build, with Clang and Ninja, so you'll need both:
 
    ```shell
    Tools\Scripts\PackageBuildWindows.bat
@@ -91,7 +115,10 @@ The Windows package includes Steam's test app files (app ID 480) so Steam featur
 
 ### Other platforms
 
-There are matching scripts for macOS, iOS and Android in `Tools/Scripts/`. Android has its own page: [Android](/docs/platforms/android.html). The macOS and iOS scripts are still a work in progress.
+There are matching scripts for macOS (`PackageBuildMacOS.sh`), iOS (`PackageBuildIOS.sh`), Android (`PackageBuildAndroid.bat`) and the web (`PackageBuildWeb.bat`) in `Tools/Scripts/`. Android, iOS and the web have their own pages:
+[Android](/docs/platforms/android.html), [iOS](/docs/platforms/ios.html) and [Web](/docs/platforms/web.html).
+
+The macOS and iOS scripts are still a work in progress.
 
 ## About shipping builds
 

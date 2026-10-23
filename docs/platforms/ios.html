@@ -67,6 +67,7 @@
         <li><a href="/docs/platforms/">Platforms</a>
           <ul>
             <li><a href="/docs/platforms/packaging.html">Packaging a build</a></li>
+            <li><a href="/docs/platforms/web.html">Web</a></li>
             <li><a href="/docs/platforms/android.html">Android</a></li>
             <li><a href="/docs/platforms/ios.html" aria-current="page">iOS</a></li>
           </ul>
@@ -91,10 +92,13 @@
 <pre><code class="language-shell">./Tools/Scripts/BuildHyperion.sh IOS Xcode Release regenerate
 </code></pre>
 <p>Open it in Xcode, pick your team under <strong>Signing</strong> (we leave signing off by default), and run it on your device.</p>
+<h2 id="packaging">Packaging</h2>
+<p><code>Tools/Scripts/PackageBuildIOS.sh</code> makes a shipping build for iOS and packages it with your project's content. It needs a Mac <strong>Release</strong> build first, for the shader and cooking tools, and asks for your project's folder name under <code>Projects/</code>. The package lands in <code>PackagedBuilds/IOS/Build_&lt;date&gt;_&lt;time&gt;/</code>.</p>
+<p>The script is still a work in progress.</p>
 <h2 id="notes">Notes</h2>
 <ul>
 <li>There's no editor on iOS.</li>
-<li>iOS uses <code>Config/EngineConfig.IOS.json</code>, which turns off the same rendering features as Android and targets 30 FPS.</li>
+<li>iOS uses <code>Config/EngineConfig.IOS.json</code>, which turns off the same rendering features as Android, plus SSR, and targets 30 FPS. The Mobile <a href="/docs/platforms/#device-tiers">device tier</a> rule applies on top of it.</li>
 </ul>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/android.html"><span>Previous</span>Android</a><a class="next" href="/docs/contributing/"><span>Next</span>Contributing</a></nav>
@@ -106,6 +110,7 @@
       <ul>
         <li><a href="#what-you-ll-need">What you'll need</a></li>
         <li><a href="#build-it">Build it</a></li>
+        <li><a href="#packaging">Packaging</a></li>
         <li><a href="#notes">Notes</a></li>
       </ul>
     </aside>

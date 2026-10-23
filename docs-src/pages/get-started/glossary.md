@@ -37,7 +37,7 @@ System
 :   Code that runs over every entity with a certain set of components, in parallel. Components are the data; systems are the logic.
 
 Subsystem
-:   Like a system, but for the whole world rather than any one scene. It gets an `Update()` call every frame.
+:   World-wide logic that isn't tied to entities or components, like a day/night clock. It gets an `Update()` call every frame.
 
 Camera, Light
 :   Entities that view the scene and light it.

@@ -105,8 +105,9 @@
 </tbody>
 </table>
 </div>
-<p><code>isOnGround</code> is true while it's standing on something.</p>
+<p><code>isOnGround</code> is true while it's standing on something, including slopes too steep to walk up.</p>
 <h2 id="movement-settings">Movement settings</h2>
+<p>These are under <code>movement</code>:</p>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -118,24 +119,38 @@
 <tbody>
 <tr>
 <td>moveSpeed</td>
-<td>Walking speed. Starts at 5.</td>
+<td>Walking speed, in m/s. Starts at 15.</td>
 </tr>
 <tr>
 <td>sprintSpeed</td>
-<td>Running speed. Starts at 7.5.</td>
+<td>Running speed. Starts at 25.</td>
+</tr>
+<tr>
+<td>groundAcceleration, airAcceleration</td>
+<td>How quickly it gets up to speed on the ground, and how much it can steer in the air.</td>
+</tr>
+<tr>
+<td>friction</td>
+<td>How quickly it slows down when you let go.</td>
 </tr>
 <tr>
 <td>stepHeight</td>
-<td>The tallest step it can walk straight up.</td>
+<td>The tallest step it can walk straight up. Starts at 0.35.</td>
 </tr>
 <tr>
 <td>maxSlopeAngle</td>
-<td>The steepest slope it can walk up, in degrees. Starts at 45.</td>
+<td>The steepest slope it can walk up, in degrees. Starts at 55.</td>
+</tr>
+<tr>
+<td>orientToMovement</td>
+<td>Turns the character to face the way it's moving, at <code>turnRate</code> degrees per second.</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>On slopes steeper than <code>maxSlopeAngle</code>, the character slides down, and can still jump off, pushed away from the slope.</p>
 <h2 id="jump-settings">Jump settings</h2>
+<p>These are under <code>jump</code>:</p>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -147,19 +162,29 @@
 <tbody>
 <tr>
 <td>speed</td>
-<td>Initial jump speed.</td>
+<td>Initial jump speed. Starts at 4.9.</td>
 </tr>
 <tr>
 <td>coyoteTime</td>
-<td>Grace period for jumping after leaving a ledge.</td>
+<td>Grace period for jumping after leaving a ledge. Starts at 0.15 seconds.</td>
 </tr>
 <tr>
 <td>bufferTime</td>
-<td>How early before landing a jump press still counts.</td>
+<td>How early before landing a jump press still counts. Starts at 0.15 seconds.</td>
+</tr>
+<tr>
+<td>cutGravityMultiplier</td>
+<td>Extra gravity while rising if you let go of jump early, for variable jump height.</td>
+</tr>
+<tr>
+<td>apexGravityMultiplier, fallGravityMultiplier</td>
+<td>Gravity near the top of the jump (below 1 gives a little hang time), and while falling.</td>
 </tr>
 </tbody>
 </table>
 </div>
+<h2 id="pushing-things">Pushing things</h2>
+<p>Under <code>push</code>, <code>massLimit</code> is the heaviest dynamic body the character can push (350 to start), and <code>maxSpeed</code> caps how fast it pushes it.</p>
 <h2 id="in-multiplayer">In multiplayer</h2>
 <p>The local player's movement is predicted on the client, so input responds immediately. The server validates each move and corrects the client if they disagree. More in <a href="/docs/multiplayer/replication.html">replication</a>.</p>
       </article>
@@ -173,6 +198,7 @@
         <li><a href="#adding-one">Adding one</a></li>
         <li><a href="#movement-settings">Movement settings</a></li>
         <li><a href="#jump-settings">Jump settings</a></li>
+        <li><a href="#pushing-things">Pushing things</a></li>
         <li><a href="#in-multiplayer">In multiplayer</a></li>
       </ul>
     </aside>

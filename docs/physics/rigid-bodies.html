@@ -109,28 +109,29 @@ crate-&gt;AddComponent&lt;RigidBodyComponent&gt;(RigidBodyComponent {
 </tr>
 <tr>
 <td>friction</td>
-<td>Surface friction</td>
+<td>Surface friction. Starts at 0.5.</td>
 </tr>
 <tr>
 <td>restitution</td>
-<td>Bounciness</td>
+<td>Bounciness. Starts at 0.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>To give a body a starting velocity, set <code>initialVelocity</code> or <code>initialAngularVelocity</code> on the component</p>
 <h2 id="shapes">Shapes</h2>
-<p>The shape defines the collision volume. Make one with <strong>Assets › New... › Physics Shape</strong>, and assign it to the component's collision shape. You can pick from:</p>
+<p>The shape defines the collision volume. Make one with <strong>Assets › Add... › Physics Shape</strong>, and assign it to the component's collision shape. You can pick from:</p>
 <ul>
 <li><strong>Box</strong>, <strong>Sphere</strong>, <strong>Capsule</strong> and <strong>Plane</strong>.</li>
 <li><strong>Convex hull</strong>, wrapped around a mesh.</li>
 <li><strong>Compound</strong>, a mesh decomposed into convex pieces. Use this for complex geometry.</li>
 <li><strong>Height field</strong>, for terrain.</li>
 </ul>
+<p>Plane and height field bodies are always static, whatever their mass.</p>
 <p>If no shape is set, a box fitted to the entity's bounds is used.</p>
 <h2 id="in-multiplayer">In multiplayer</h2>
-<p>The server is the authority, and simulates physics for the world, which the clients predict + sync with.</p>
-<p>Clients get replicated bodies' positions and velocities from the server, and interpolate between updates. More in <a href="/docs/multiplayer/replication.html">replication</a>.</p>
+<p>The server is the authority, and simulates physics for the world.</p>
+<p>On clients, replicated bodies don't simulate: they follow the positions and velocities the server sends, interpolating between updates. Bodies that aren't replicated are simulated locally on each client. More in <a href="/docs/multiplayer/replication.html">replication</a>.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/physics/"><span>Previous</span>Physics</a><a class="next" href="/docs/physics/character-controllers.html"><span>Next</span>Character controllers</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/physics/rigid-bodies.md" rel="noopener">Improve this page on GitHub</a></p>

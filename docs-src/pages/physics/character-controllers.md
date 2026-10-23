@@ -15,24 +15,39 @@ Add a `CharacterControllerComponent` to an entity. By default it's driven by key
 | Sprint | <kbd>Shift</kbd> |
 | Jump | <kbd>Space</kbd> |
 
-`isOnGround` is true while it's standing on something.
+`isOnGround` is true while it's standing on something, including slopes too steep to walk up.
 
 ## Movement settings
 
+These are under `movement`:
+
 | Setting | What it does |
 |---|---|
-| moveSpeed | Walking speed. Starts at 5. |
-| sprintSpeed | Running speed. Starts at 7.5. |
-| stepHeight | The tallest step it can walk straight up. |
-| maxSlopeAngle | The steepest slope it can walk up, in degrees. Starts at 45. |
+| moveSpeed | Walking speed, in m/s. Starts at 15. |
+| sprintSpeed | Running speed. Starts at 25. |
+| groundAcceleration, airAcceleration | How quickly it gets up to speed on the ground, and how much it can steer in the air. |
+| friction | How quickly it slows down when you let go. |
+| stepHeight | The tallest step it can walk straight up. Starts at 0.35. |
+| maxSlopeAngle | The steepest slope it can walk up, in degrees. Starts at 55. |
+| orientToMovement | Turns the character to face the way it's moving, at `turnRate` degrees per second. |
+
+On slopes steeper than `maxSlopeAngle`, the character slides down, and can still jump off, pushed away from the slope.
 
 ## Jump settings
 
+These are under `jump`:
+
 | Setting | What it does |
 |---|---|
-| speed | Initial jump speed. |
-| coyoteTime | Grace period for jumping after leaving a ledge. |
-| bufferTime | How early before landing a jump press still counts. |
+| speed | Initial jump speed. Starts at 4.9. |
+| coyoteTime | Grace period for jumping after leaving a ledge. Starts at 0.15 seconds. |
+| bufferTime | How early before landing a jump press still counts. Starts at 0.15 seconds. |
+| cutGravityMultiplier | Extra gravity while rising if you let go of jump early, for variable jump height. |
+| apexGravityMultiplier, fallGravityMultiplier | Gravity near the top of the jump (below 1 gives a little hang time), and while falling. |
+
+## Pushing things
+
+Under `push`, `massLimit` is the heaviest dynamic body the character can push (350 to start), and `maxSpeed` caps how fast it pushes it.
 
 ## In multiplayer
 

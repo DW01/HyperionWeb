@@ -75,10 +75,10 @@ Projects/MyGame/
 
 Press :icon[play] **Play**. The editor loads `MyGame.dll` and runs your `Game` class in [play-in-editor](/docs/editor/play-in-editor.html).
 
-![The example running in the editor: cubes circling the player](/assets/docs-csharp-play.jpg)
-
-There's no hot reload for the game project. The editor keeps using the build it first loaded, so after rebuilding, restart the editor to see your changes.
+![The example running in the editor](/assets/docs-csharp-play.jpg)
 
 ## Package
 
-**Build › Package Game** works the same as for C++. The build includes the .NET runtime, so the packaged game runs on a machine without .NET installed. See [Packaging a build](/docs/platforms/packaging.html).
+**Build › Package Game** works the same as for C++. Your project will be compiled with NativeAOT, meaning it will be able to run on players' machines without needing them to have .NET installed!
+
+To build on Windows, that needs Visual Studio or the Build Tools with the **Desktop development with C++** workload. For other platforms, you also need the appropriate build tools. See [Packaging a build](/docs/platforms/packaging.html).

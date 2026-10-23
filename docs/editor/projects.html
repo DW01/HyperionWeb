@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Working with projects · Hyperion Docs</title>
-  <meta name="description" content="Create, open and save projects in the Hyperion editor, and see what goes inside a project folder.">
+  <meta name="description" content="Create, open and save projects in the Hyperion editor, organize assets in folders, and see what goes inside a project folder.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/editor/projects.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Working with projects · Hyperion Docs">
-  <meta property="og:description" content="Create, open and save projects in the Hyperion editor, and see what goes inside a project folder.">
+  <meta property="og:description" content="Create, open and save projects in the Hyperion editor, organize assets in folders, and see what goes inside a project folder.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/editor/projects.html">
   <meta property="og:image" content="/assets/terrain-agx.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -83,24 +83,74 @@
         <h1>Working with projects</h1>
         <p class="lede">A project holds your game's scenes, assets, scripts and settings in one folder.</p>
 
+<h2 id="the-start-screen">The start screen</h2>
+<p>The editor opens on a start screen:</p>
+<ul>
+<li><strong>New Project</strong> makes a project from the blank template.</li>
+<li><strong>Browse...</strong> opens an existing <code>.hypproject</code> file.</li>
+<li><strong>Recent Projects</strong> lists what you've opened before. Use the arrow keys and <kbd>Enter</kbd> to pick one. Right-click one to pin it, show it in Explorer, or remove it from the list.</li>
+</ul>
+<p>Tick <strong>Open last project on startup</strong> to skip the start screen next time. To turn that back off, untick <strong>Always Open Most Recent Project on Startup</strong> under the arrow next to <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 4.5V9.10022L2.92389 7.5C3.45979 6.5718 4.45017 6 5.52196 6L11.9146 6C11.7087 5.4174 11.1531 5 10.5 5H7C6.86739 5 6.74021 4.94732 6.64645 4.85355L4.93934 3.14645C4.84557 3.05268 4.71839 3 4.58579 3H3.5C2.67157 3 2 3.67157 2 4.5ZM7.06895 13.9953C7.04641 13.9984 7.02339 14 7 14H3.5C2.11929 14 1 12.8807 1 11.5V4.5C1 3.11929 2.11929 2 3.5 2H4.58579C4.98361 2 5.36514 2.15804 5.64645 2.43934L7.20711 4H10.5C11.724 4 12.7426 4.87965 12.958 6.04127C14.605 6.34148 15.5443 8.22106 14.6616 9.75L13.0766 12.4953C12.5407 13.4235 11.5503 13.9953 10.4785 13.9953H7.06895ZM5.52196 7C4.80743 7 4.14718 7.3812 3.78991 8L2.20492 10.7453C1.62757 11.7453 2.34926 12.9953 3.50396 12.9953L10.4785 12.9953C11.193 12.9953 11.8533 12.6141 12.2105 11.9953L13.7955 9.25C14.3729 8.25 13.6512 7 12.4965 7L5.52196 7Z"/></svg> <strong>Open</strong> in the toolbar.</p>
 <h2 id="new-projects">New projects</h2>
-<p>The editor opens with a new, unsaved project containing a main scene, a sun, and a player with a camera.</p>
-<p>Use <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14.414 3.207L12.793 1.586C12.421 1.213 11.905 1 11.379 1H3C1.897 1 1 1.897 1 3V13C1 14.103 1.897 15 3 15H13C14.103 15 15 14.103 15 13V4.621C15 4.095 14.787 3.579 14.414 3.207ZM9 2V3.5C9 3.776 8.776 4 8.5 4H6.5C6.224 4 6 3.776 6 3.5V2H9ZM5 14V9.5C5 9.224 5.224 9 5.5 9H10.5C10.776 9 11 9.224 11 9.5V14H5ZM14 13C14 13.551 13.551 14 13 14H12V9.5C12 8.673 11.327 8 10.5 8H5.5C4.673 8 4 8.673 4 9.5V14H3C2.449 14 2 13.551 2 13V3C2 2.449 2.449 2 3 2H5V3.5C5 4.327 5.673 5 6.5 5H8.5C9.327 5 10 4.327 10 3.5V2H11.379C11.642 2 11.9 2.107 12.086 2.293L13.707 3.914C13.893 4.1 14 4.358 14 4.621V13Z"/></svg> <strong>Save</strong> (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and pick a folder to keep it. Until the first save, it lives in a temporary folder.</p>
+<p><strong>New Project</strong> (on the start screen, or <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 1C3.89543 1 3 1.89543 3 3V13C3 14.1046 3.89543 15 5 15H11C12.1046 15 13 14.1046 13 13V5.41421C13 5.01639 12.842 4.63486 12.5607 4.35355L9.64645 1.43934C9.36514 1.15804 8.98361 1 8.58579 1H5ZM4 3C4 2.44772 4.44772 2 5 2H8V4.5C8 5.32843 8.67157 6 9.5 6H12V13C12 13.5523 11.5523 14 11 14H5C4.44772 14 4 13.5523 4 13V3ZM11.7929 5H9.5C9.22386 5 9 4.77614 9 4.5V2.20711L11.7929 5Z"/></svg> in the toolbar) asks where to save the project first, and creates a folder for it named after the project. It starts with a main scene, a sun, the ground, and a player with a camera.</p>
 <h2 id="opening-a-project">Opening a project</h2>
-<p>Use <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 4.5V9.10022L2.92389 7.5C3.45979 6.5718 4.45017 6 5.52196 6L11.9146 6C11.7087 5.4174 11.1531 5 10.5 5H7C6.86739 5 6.74021 4.94732 6.64645 4.85355L4.93934 3.14645C4.84557 3.05268 4.71839 3 4.58579 3H3.5C2.67157 3 2 3.67157 2 4.5ZM7.06895 13.9953C7.04641 13.9984 7.02339 14 7 14H3.5C2.11929 14 1 12.8807 1 11.5V4.5C1 3.11929 2.11929 2 3.5 2H4.58579C4.98361 2 5.36514 2.15804 5.64645 2.43934L7.20711 4H10.5C11.724 4 12.7426 4.87965 12.958 6.04127C14.605 6.34148 15.5443 8.22106 14.6616 9.75L13.0766 12.4953C12.5407 13.4235 11.5503 13.9953 10.4785 13.9953H7.06895ZM5.52196 7C4.80743 7 4.14718 7.3812 3.78991 8L2.20492 10.7453C1.62757 11.7453 2.34926 12.9953 3.50396 12.9953L10.4785 12.9953C11.193 12.9953 11.8533 12.6141 12.2105 11.9953L13.7955 9.25C14.3729 8.25 13.6512 7 12.4965 7L5.52196 7Z"/></svg> <strong>Open</strong> in the toolbar and pick a <code>.hypproject</code> file.</p>
+<p>Use <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 4.5V9.10022L2.92389 7.5C3.45979 6.5718 4.45017 6 5.52196 6L11.9146 6C11.7087 5.4174 11.1531 5 10.5 5H7C6.86739 5 6.74021 4.94732 6.64645 4.85355L4.93934 3.14645C4.84557 3.05268 4.71839 3 4.58579 3H3.5C2.67157 3 2 3.67157 2 4.5ZM7.06895 13.9953C7.04641 13.9984 7.02339 14 7 14H3.5C2.11929 14 1 12.8807 1 11.5V4.5C1 3.11929 2.11929 2 3.5 2H4.58579C4.98361 2 5.36514 2.15804 5.64645 2.43934L7.20711 4H10.5C11.724 4 12.7426 4.87965 12.958 6.04127C14.605 6.34148 15.5443 8.22106 14.6616 9.75L13.0766 12.4953C12.5407 13.4235 11.5503 13.9953 10.4785 13.9953H7.06895ZM5.52196 7C4.80743 7 4.14718 7.3812 3.78991 8L2.20492 10.7453C1.62757 11.7453 2.34926 12.9953 3.50396 12.9953L10.4785 12.9953C11.193 12.9953 11.8533 12.6141 12.2105 11.9953L13.7955 9.25C14.3729 8.25 13.6512 7 12.4965 7L5.52196 7Z"/></svg> <strong>Open</strong> in the toolbar and pick a <code>.hypproject</code> file, or pick one from the recent projects under its arrow.</p>
 <h2 id="what-s-inside">What's inside</h2>
 <pre><code>Projects/MyGame/
   MyGame.hypproject
-  Scenes/
-  Worlds/
-  Materials/
-  Meshes/
-  Prefabs/
-  Scripts/
-  Textures/
+  AssetFolders.txt
+  Content/
+    Materials/
+    Meshes/
+    Prefabs/
+    Scenes/
+    Scripts/
+    Textures/
+    Worlds/
+  Saved/
 </code></pre>
-<p>The <code>.hypproject</code> file is the project itself, and the folders hold your assets, sorted by type. Assets are saved as <code>.hmf</code> files, a readable text format, with larger binary data in <code>.blob</code> files next to them.</p>
-<p>A project with C++ code also has <code>Source</code>, <code>Build</code> and <code>Binaries</code> folders. See <a href="/docs/editor/build-game.html">Building your game</a>.</p>
+<p>The <code>.hypproject</code> file is the project itself, and <code>Content</code> holds your assets, sorted into folders by type. Assets are saved as <code>.hmf</code> files, a readable text format, with larger binary data in <code>.blob</code> files next to them. <code>Saved</code> holds editor state, like the thumbnail on the start screen.</p>
+<p>A project with C++ or C# code also has <code>Source</code>, <code>Build</code> and <code>Binaries</code> folders, and packaging adds <code>Packaged</code>. See <a href="/docs/editor/build-game.html">Building your game</a>.</p>
+<div class="docs-note">
+<p>Projects made before the <code>Content</code> folder keep their assets next to the <code>.hypproject</code> file, and still work as they are.</p>
+</div>
+<h2 id="the-assets-panel">The Assets panel</h2>
+<p>The Assets panel has its own folders, separate from how files are laid out on disk. Make as many as you like and organize assets however you want:</p>
+<ul>
+<li><strong>Add... › Folder</strong>, or right-click a folder, to make one. Right-click to rename or delete it.</li>
+<li>Drag assets and folders onto a folder, or onto the path at the top, to move them. Moves can be undone.</li>
+<li><strong>Import...</strong> and <strong>Add...</strong> put new assets in the folder you're in.</li>
+<li>The search box searches the current folder, or everything from the top. Filter by type, and sort by name, date modified or type.</li>
+</ul>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>Open</td>
+</tr>
+<tr>
+<td><kbd>Backspace</kbd></td>
+<td>Up a folder</td>
+</tr>
+<tr>
+<td><kbd>F2</kbd></td>
+<td>Rename a folder</td>
+</tr>
+<tr>
+<td><kbd>Delete</kbd></td>
+<td>Delete</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These folders are saved in <code>AssetFolders.txt</code>, and only the editor uses them.</p>
 <h2 id="saving">Saving</h2>
 <p>There's no separate &quot;save scene&quot;. Saving the project saves everything that's changed, scenes included. The editor camera position is saved with the project too.</p>
 <p>Close with unsaved changes, and the editor will ask whether to save, discard, or cancel.</p>
@@ -112,9 +162,11 @@
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">Table of contents</p>
       <ul>
+        <li><a href="#the-start-screen">The start screen</a></li>
         <li><a href="#new-projects">New projects</a></li>
         <li><a href="#opening-a-project">Opening a project</a></li>
         <li><a href="#what-s-inside">What's inside</a></li>
+        <li><a href="#the-assets-panel">The Assets panel</a></li>
         <li><a href="#saving">Saving</a></li>
       </ul>
     </aside>

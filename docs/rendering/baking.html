@@ -64,6 +64,7 @@
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a>
           <ul>
             <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/lights.html">Lights &amp; shadows</a></li>
             <li><a href="/docs/rendering/baking.html" aria-current="page">Baking lighting</a></li>
             <li><a href="/docs/rendering/global-illumination.html">Global illumination</a></li>
             <li><a href="/docs/rendering/shaders.html">Writing shaders</a></li>
@@ -91,10 +92,11 @@
 <p>For lighting and reflections on moving objects, add <strong>Reflection Probes</strong> and <strong>Irradiance Probes</strong> from the same menu.</p>
 </li>
 <li>
-<p>Click <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M532-131q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-90T395-320q0-37 11-78t38-106q23-57 32-87.5t9-56.5q0-34-15-63.5T423-771q-6-6-9.5-14t-3.5-16q0-8 3-14.5t8-12.5q6-6 13.5-9t15.5-3q8 0 15 3t13 8q44 41 65.5 86t21.5 95q0 35-10.5 73.5T518-474q-25 60-34 92t-9 61q0 35 14.5 67.5T534-188q5 6 8 13t3 15q0 8-3 15.5T532-131Zm195 0q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-89.5T590-319q0-37 11-79t38-106q23-57 32-87t9-56q0-34-15-64.5T618-771q-6-6-9-13.5t-3-15.5q0-8 2.5-14.5T616-827q6-6 14-9.5t16-3.5q8 0 14.5 3t12.5 8q44 41 65.5 86t21.5 95q0 35-10.5 73.5T713-473q-25 60-34 92t-9 60q0 35 15 68.5t45 65.5q5 6 7.5 13t2.5 14q0 8-3 16t-10 13Zm-390 0q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-89.5T200-319q0-37 11-79t38-106q23-57 32-87t9-56q0-34-15-64.5T228-771q-7-6-10-13.5t-3-15.5q0-8 3-15t8-13q6-6 13.5-9t15.5-3q8 0 15 3t13 8q44 41 65.5 85.5T370-648q0 35-10 73.5T324-474q-25 60-34 92t-9 61q0 35 14.5 68.5T340-187q5 6 7.5 13t2.5 14q0 8-3 16t-10 13Z"/></svg> <strong>Bake</strong> in the toolbar and pick what to bake: <strong>Lightmaps</strong>, <strong>Reflection Probes</strong> or <strong>Irradiance Probes</strong>.</p>
+<p>Click <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M532-131q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-90T395-320q0-37 11-78t38-106q23-57 32-87.5t9-56.5q0-34-15-63.5T423-771q-6-6-9.5-14t-3.5-16q0-8 3-14.5t8-12.5q6-6 13.5-9t15.5-3q8 0 15 3t13 8q44 41 65.5 86t21.5 95q0 35-10.5 73.5T518-474q-25 60-34 92t-9 61q0 35 14.5 67.5T534-188q5 6 8 13t3 15q0 8-3 15.5T532-131Zm195 0q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-89.5T590-319q0-37 11-79t38-106q23-57 32-87t9-56q0-34-15-64.5T618-771q-6-6-9-13.5t-3-15.5q0-8 2.5-14.5T616-827q6-6 14-9.5t16-3.5q8 0 14.5 3t12.5 8q44 41 65.5 86t21.5 95q0 35-10.5 73.5T713-473q-25 60-34 92t-9 60q0 35 15 68.5t45 65.5q5 6 7.5 13t2.5 14q0 8-3 16t-10 13Zm-390 0q-6 5-12.5 8t-14.5 3q-8 0-16-3.5t-14-9.5q-41-44-60.5-89.5T200-319q0-37 11-79t38-106q23-57 32-87t9-56q0-34-15-64.5T228-771q-7-6-10-13.5t-3-15.5q0-8 3-15t8-13q6-6 13.5-9t15.5-3q8 0 15 3t13 8q44 41 65.5 85.5T370-648q0 35-10 73.5T324-474q-25 60-34 92t-9 61q0 35 14.5 68.5T340-187q5 6 7.5 13t2.5 14q0 8-3 16t-10 13Z"/></svg> <strong>Bake</strong> in the toolbar and pick what to bake: <strong>Lightmaps</strong>, <strong>Reflection Probes</strong>, <strong>Irradiance Probes</strong>, <strong>Fog Volumes</strong> or <strong>Static Shadows</strong>.</p>
 </li>
 </ol>
 <p>Progress is shown in an overlay while the bake runs.</p>
+<p>When you change something a bake depends on, like moving a static object or a light, the editor shows what needs a rebake in an overlay.</p>
 <h2 id="what-gets-baked">What gets baked</h2>
 <div class="docs-table-wrap">
 <table class="docs-table">
@@ -117,6 +119,14 @@
 <td>Irradiance probes</td>
 <td>How much light reaches a point, for lighting things that move.</td>
 </tr>
+<tr>
+<td>Fog volumes</td>
+<td>Light from static lights scattering through fog volumes.</td>
+</tr>
+<tr>
+<td>Static shadows</td>
+<td>Shadow maps for static point and spot lights with <strong>Bake static shadow map</strong> ticked. See <a href="/docs/rendering/lights.html#baked-static-shadows">lights &amp; shadows</a>.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -134,15 +144,15 @@
 <tbody>
 <tr>
 <td>NumSamples</td>
-<td>More samples, less noise, longer bakes.</td>
+<td>More samples, less noise, longer bakes. The default config uses 1.</td>
 </tr>
 <tr>
 <td>MaxRayDistance</td>
-<td>How far rays travel looking for light.</td>
+<td>How far rays travel looking for light. Defaults to 1000.</td>
 </tr>
 <tr>
 <td>ForceComputeTracing</td>
-<td>Use the compute path even when hardware ray tracing is available.</td>
+<td>Use the compute path even when hardware ray tracing is available. Also the <code>Baking.ForceComputeTracing</code> CVar.</td>
 </tr>
 </tbody>
 </table>
@@ -151,7 +161,7 @@
 <p>Each <a href="/docs/world/swatches.html">swatch</a> has its own bake.</p>
 </div>
       </article>
-      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/rendering/materials.html"><span>Previous</span>Materials</a><a class="next" href="/docs/rendering/global-illumination.html"><span>Next</span>Global illumination</a></nav>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/rendering/lights.html"><span>Previous</span>Lights &amp; shadows</a><a class="next" href="/docs/rendering/global-illumination.html"><span>Next</span>Global illumination</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/rendering/baking.md" rel="noopener">Improve this page on GitHub</a></p>
     </main>
 

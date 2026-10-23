@@ -5,13 +5,7 @@ lede: Gameplay scripts can be written in Strata or C#
 summary: Gameplay scripts in Strata or C#, and exposing C++ to them.
 ---
 
-Each script picks its language when you create it, and a project can use both languages - you aren't boxed into just one
-
-## What is Strata?
-
-You probably haven't heard of Strata - because it's a new project aimed at creating a simple, C-type language meant for scripting (separate from Hyperion).
-
-Strata is statically typed and compiled, with no garbage collector, ref counting or manual memory management - the [Strata overview](/strata.html) covers the syntax
+Hyperion supports scripting with C#. Scripts can be attached to individual objects to define behaviour.
 
 ## Exposing C++ to scripts
 
@@ -19,7 +13,7 @@ Engine types show up in both languages through reflection. Add a class in C++ wi
 
 ```cpp
 HYP_CLASS()
-class Camera : public ObjectBase
+class Camera : public Entity
 {
     HYP_OBJECT_BODY(Camera);
 public:
@@ -32,14 +26,12 @@ public:
 ```
 
 
+## In shipped games
+
+When you [package](/docs/platforms/packaging.html) a game, C# scripts are compiled ahead of time with NativeAOT, so the game doesn't need .NET installed.
+
 ## In this section
 
 ::: cards
 children
-:::
-
-## TODO
-
-::: soon
-- Shipping builds (ahead-of-time compiled scripts)
 :::

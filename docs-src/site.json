@@ -17,10 +17,10 @@
     { "section": "editor", "pages": ["tour", "projects", "prefabs", "play-in-editor", "build-game", "console"] },
     { "section": "world", "pages": ["entities", "systems", "streaming", "swatches"] },
     { "section": "scripting", "pages": ["first-script", "engine-bindings", "samples"] },
-    { "section": "rendering", "pages": ["materials", "baking", "global-illumination", "shaders", "post-processing"] },
+    { "section": "rendering", "pages": ["materials", "lights", "baking", "global-illumination", "shaders", "post-processing"] },
     { "section": "physics", "pages": ["rigid-bodies", "character-controllers"] },
     { "section": "multiplayer", "pages": ["server", "replication"] },
-    { "section": "platforms", "pages": ["packaging", "android", "ios"] },
+    { "section": "platforms", "pages": ["packaging", "web", "android", "ios"] },
     { "section": "contributing", "pages": [] }
   ]
 }

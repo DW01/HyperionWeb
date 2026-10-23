@@ -83,7 +83,7 @@
 
 <h2 id="how-it-works">How it works</h2>
 <p>Every world has a <strong>world grid</strong>, made up of one or more <strong>layers</strong>. Each layer is a grid of <strong>streaming cells</strong>.</p>
-<p>Cells within range of the player's camera are loaded (and cells out of range are unloaded).</p>
+<p>Cells within range of a <strong>streaming volume</strong> are loaded (and cells out of range are unloaded). Cameras have one, and in multiplayer the server keeps one around each connected player.</p>
 <h2 id="putting-a-scene-on-the-grid">Putting a scene on the grid</h2>
 <p>Each scene has a <strong>streaming centroid</strong>: the grid cell it belongs to. Set it in the scene's properties in the editor, and when the scene is added to the world, it lands on the built-in scenes layer at that spot.</p>
 <h2 id="layer-settings">Layer settings</h2>
@@ -103,15 +103,15 @@
 </tr>
 <tr>
 <td>maxDistance</td>
-<td>How far out from the camera's cell to load, counted in cells. Defaults to 1.</td>
+<td>How far out from the volume's cell to load, counted in cells. Defaults to 1. The terrain layer uses 8.</td>
 </tr>
 <tr>
 <td>infinite</td>
-<td>Whether the grid goes on forever. Useful for infinite terrain generation</td>
+<td>Whether the grid goes on forever. Useful for infinite terrain generation. Defaults to on.</td>
 </tr>
 <tr>
 <td>range</td>
-<td>The cells the grid covers when it isn't infinite.</td>
+<td>The cells the grid covers when it isn't infinite, as a min and max used for both axes. Defaults to -10 to 10.</td>
 </tr>
 </tbody>
 </table>

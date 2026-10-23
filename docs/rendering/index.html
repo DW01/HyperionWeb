@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rendering &amp; lighting · Hyperion Docs</title>
-  <meta name="description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
+  <meta name="description" content="An overview of rendering in Hyperion Engine: DirectX 12, Vulkan and WebGPU, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/rendering/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Rendering &amp; lighting · Hyperion Docs">
-  <meta property="og:description" content="An overview of rendering in Hyperion Engine: Vulkan and DirectX 12, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
+  <meta property="og:description" content="An overview of rendering in Hyperion Engine: DirectX 12, Vulkan and WebGPU, clustered shading, baked lightmaps, realtime GI and HLSL shaders.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/rendering/">
   <meta property="og:image" content="/assets/terrain-agx.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -64,6 +64,7 @@
         <li><a href="/docs/rendering/" aria-current="page">Rendering &amp; lighting</a>
           <ul>
             <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/lights.html">Lights &amp; shadows</a></li>
             <li><a href="/docs/rendering/baking.html">Baking lighting</a></li>
             <li><a href="/docs/rendering/global-illumination.html">Global illumination</a></li>
             <li><a href="/docs/rendering/shaders.html">Writing shaders</a></li>
@@ -84,24 +85,21 @@
         <figure class="docs-hero docs-hero-crop" style="aspect-ratio: 1830 / 773"><img src="/assets/editor-scene.jpg" alt="A brick-walled room with a red sphere, coloured boxes and a pillar, in the Hyperion editor viewport" width="2560" height="1540" style="width: 139.8907%; left: -39.1803%; top: -30.0129%" fetchpriority="high"></figure>
 <h2 id="overview">Overview</h2>
 <ul>
-<li><strong>Vulkan</strong> is the main backend. DirectX 12 is available on Windows as an experimental backend.</li>
+<li><strong>Backends</strong>: DirectX 12 is the default on Windows, and Vulkan is used everywhere else (through MoltenVK on Apple platforms). Windows builds can also use Vulkan. Web builds use WebGPU.</li>
 <li><strong>Clustered deferred shading</strong> supports large numbers of dynamic lights. Translucent materials use a forward clustered pass.</li>
 <li><strong>Baked lighting</strong> comes from the lightmapper built into the editor, along with reflection and irradiance probes for moving objects.</li>
-<li><strong>Realtime GI &amp; reflections</strong>: In addition to our baked lighting, <strong>Glimmer</strong> gives you realtime GI on desktop (Windows and macOS, Vulkan and DirectX 12), no ray tracing hardware needed. It's on by default.
+<li><strong>Realtime GI &amp; reflections</strong>: In addition to our baked lighting, <strong>Glimmer</strong> gives you realtime GI on desktop and in the browser, no ray tracing hardware needed. It's on by default.
 HWRT-supported devices can also use DDGI and ray traced reflections. For non-HWRT we have screen space reflections. <em>Screen space global illumination deprecatation is planned so it is not recommended to use</em></li>
-<li><strong>Shaders</strong> are written in HLSL, compiled with DXC, and reload live in the editor on save</li>
+<li><strong>Shaders</strong> are written in HLSL, compiled with DXC, and reload live in the editor on save.</li>
 </ul>
 <h2 id="in-this-section">In this section</h2>
 <ul class="docs-links">
   <li><a href="/docs/rendering/materials.html">Materials</a><span>PBR parameters, texture slots and buckets.</span></li>
+  <li><a href="/docs/rendering/lights.html">Lights &amp; shadows</a><span>Light types and shadow options.</span></li>
   <li><a href="/docs/rendering/baking.html">Baking lighting</a><span>Baking lightmaps and probes in the editor.</span></li>
   <li><a href="/docs/rendering/global-illumination.html">Global illumination</a><span>The GI options, and how to toggle them.</span></li>
   <li><a href="/docs/rendering/shaders.html">Writing shaders</a><span>HLSL, permutations and live reload.</span></li>
   <li><a href="/docs/rendering/post-processing.html">Post-processing</a><span>Bloom, TAA, tonemapping, exposure and fog.</span></li>
-</ul>
-<h2 id="todo">TODO</h2>
-<ul class="docs-soon">
-<li>Lights and shadows</li>
 </ul>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/scripting/samples.html"><span>Previous</span>Samples</a><a class="next" href="/docs/rendering/materials.html"><span>Next</span>Materials</a></nav>
@@ -113,7 +111,6 @@ HWRT-supported devices can also use DDGI and ray traced reflections. For non-HWR
       <ul>
         <li><a href="#overview">Overview</a></li>
         <li><a href="#in-this-section">In this section</a></li>
-        <li><a href="#todo">TODO</a></li>
       </ul>
     </aside>
   </div>

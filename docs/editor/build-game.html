@@ -101,12 +101,28 @@
 <td>Adds a C# or C++ project to your project folder. Once it exists, this becomes <strong>Open C# Project Folder</strong> or <strong>Open C++ Project Folder</strong>.</td>
 </tr>
 <tr>
+<td>Change Language...</td>
+<td>Switches the project between C# and C++. Only applicable when source files haven't been changed.</td>
+</tr>
+<tr>
 <td>Build Game</td>
 <td>Compiles that project into a game executable.</td>
 </tr>
 <tr>
+<td>Reload Game</td>
+<td>Loads the latest build of your C++ game into the editor. See <a href="#in-the-editor">In the editor</a>.</td>
+</tr>
+<tr>
 <td>Package Game</td>
 <td>Makes a standalone copy of the game to share. See <a href="/docs/platforms/packaging.html">Packaging a build</a>.</td>
+</tr>
+<tr>
+<td>Package for Web</td>
+<td>Builds the game for the browser. See <a href="/docs/platforms/web.html">Web</a>.</td>
+</tr>
+<tr>
+<td>Packaging Settings...</td>
+<td>Settings for packaged builds - see <a href="/docs/platforms/packaging.html#packaging-settings">Packaging settings</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -159,8 +175,6 @@
     Game::OnLaunch();
 
     HYP_LOG(Game, Info, &quot;MyGameGame launched&quot;);
-
-    StartSimulating();
 }
 
 void MyGameGame::OnUpdate(float delta)
@@ -254,11 +268,11 @@ void MyGameGame::OnUpdate(float delta)
 <p>The single player default comes from <code>Binaries/Windows/Config/GlobalConfig.json</code>; anything you pass on the command line overrides it. More in <a href="/docs/multiplayer/server.html">Running a server</a>.</p>
 <h2 id="in-the-editor">In the editor</h2>
 <p>Once the game is built, the editor loads <code>MyGameGame.dll</code> when it opens your project, and <a href="/docs/editor/play-in-editor.html">play-in-editor</a> runs your <code>Game</code> class.</p>
+<h3 id="hot-reload">Hot reload</h3>
+<p>You can rebuild while the project is open. When <code>MyGameGame.dll</code> changes, the editor loads the new build by itself, whether you built from the editor, Visual Studio or <code>Build.bat</code>.</p>
+<p>To force a reload, use <strong>Build › Reload Game</strong>. Either way, it waits until you stop playing, and Play always runs the newest build.</p>
 <div class="docs-note">
-<p>There's no hot reload for C++. You can rebuild while the project is open, but the editor keeps using the build it loaded until you restart it.</p>
-</div>
-<div class="docs-note">
-<p>A project that's been saved with your <code>Game</code> class needs its built game to open. If the editor reports that the game module isn't built, run <code>Build/Windows/Build.bat</code> in the project folder, then open the project again.</p>
+<p>To turn the automatic reload off, set the <code>Editor.AutoReloadGameModule</code> CVar to <code>false</code>.</p>
 </div>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/editor/play-in-editor.html"><span>Previous</span>Play-in-editor</a><a class="next" href="/docs/editor/console.html"><span>Next</span>Console &amp; CVars</a></nav>

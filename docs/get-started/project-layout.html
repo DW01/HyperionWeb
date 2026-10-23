@@ -97,7 +97,7 @@
 </tr>
 <tr>
 <td>Config</td>
-<td>Engine and runtime settings (<code>EngineConfig.json</code>, <code>GlobalConfig.json</code>), and the list of shaders to compile.</td>
+<td>Engine and runtime settings (<code>EngineConfig.json</code>, <code>GlobalConfig.json</code>) and their per-platform versions, device tier rules (<code>DeviceTiers.hmf</code>), and the list of shaders to compile (<code>Shaders.hmf</code>).</td>
 </tr>
 <tr>
 <td>Content</td>
@@ -109,15 +109,19 @@
 </tr>
 <tr>
 <td>Tools</td>
-<td>Build scripts, CodeGenTool source and other misc tools</td>
+<td>Build and packaging scripts, CodeGenTool source and other misc tools</td>
 </tr>
 <tr>
 <td>Documentation</td>
-<td></td>
+<td>Longer guides, like compiling the engine and the console, and third-party licenses.</td>
 </tr>
 <tr>
 <td>Build, Binaries</td>
 <td>Where your build output goes <strong>Not committed, these are excluded via .gitignore</strong></td>
+</tr>
+<tr>
+<td>PackagedBuilds</td>
+<td>Output of the <a href="/docs/platforms/packaging.html#with-the-packaging-scripts">packaging scripts</a>. Also not committed.</td>
 </tr>
 </tbody>
 </table>
@@ -154,7 +158,15 @@
 </tr>
 <tr>
 <td>Sample</td>
-<td>The sample app's entry point</td>
+<td>The sample games: <code>DefaultGame</code> (C++, builds <code>hyperion-sample</code>) and <code>CSharpGame</code> (C#)</td>
+</tr>
+<tr>
+<td>Templates</td>
+<td>The templates the editor uses to <a href="/docs/editor/build-game.html">generate game projects</a>, in C++ and C#, and the web page for web builds</td>
+</tr>
+<tr>
+<td>PlatformSpecific</td>
+<td>Per-platform projects, like the Android Gradle project</td>
 </tr>
 <tr>
 <td>Generated</td>

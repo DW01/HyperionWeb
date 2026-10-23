@@ -98,14 +98,13 @@ meshComponent.material = crateMaterial;
 crate-&gt;AddComponent&lt;MeshComponent&gt;(meshComponent);
 crate-&gt;SetLocalBounds(crateMesh-&gt;GetAABB());
 </code></pre>
-<p>The last line sets the entity's bounds, which culling uses. The other component methods:</p>
+<p>Other component methods:</p>
 <ul>
-<li><code>GetComponent&lt;T&gt;()</code> returns a reference. The component must exist.</li>
+<li><code>GetComponent&lt;T&gt;()</code> returns a reference. The component must exist!</li>
 <li><code>TryGetComponent&lt;T&gt;()</code> returns a pointer, or <code>nullptr</code> if it's missing.</li>
 <li><code>HasComponent&lt;T&gt;()</code> checks for one.</li>
 <li><code>RemoveComponent&lt;T&gt;()</code> removes it.</li>
 </ul>
-<p>An entity can only have one of each component type. Adding a second will trip an assert.</p>
 <h2 id="transforms">Transforms</h2>
 <p>Entities are nodes, so they've got a transform. The <code>Local</code> setters are relative to the parent, the <code>World</code> ones aren't:</p>
 <pre><code class="language-cpp">crate-&gt;SetLocalTranslation(Vec3f(0.0f, 2.0f, 0.0f));

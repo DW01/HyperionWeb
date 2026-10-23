@@ -7,12 +7,17 @@ summary: HLSL, permutations and live reload.
 
 ## Adding a shader
 
-Shaders live in `Source/Shaders/`. Write your `.hlsl` file, then register it in `Config/Shaders.hmf`:
+Shaders live in `Source/Shaders/`. Write your `.hlsl` file, then add it to the `Definitions` list in `Config/Shaders.hmf`:
 
 ```
-ShaderDefinition "MyEffect" {
-    VS = "MyEffect/MyEffect.hlsl"
-    PS = "MyEffect/MyEffect.hlsl"
+ShaderDefinitions "ShaderDefinitions" {
+    Definitions = [
+        ...
+        ShaderDefinition "MyEffect" {
+            VS = "MyEffect/MyEffect.hlsl"
+            PS = "MyEffect/MyEffect.hlsl"
+        }
+    ]
 }
 ```
 
@@ -25,12 +30,14 @@ Paths are relative to `Source/Shaders/`. The keys are the stages:
 | CS | Compute shader |
 | RGS, CHS, MS | Ray tracing: ray generation, closest hit, and miss |
 
+`Condition = "Rendering.FogVolumes"` (any bool CVar) only compiles and uses the shader while that CVar is on.
+
 ## Permutations
 
 Shader variants are declared at the top of the file:
 
 ```hlsl
-PERMUTE(HBAO_ENABLED)
+PERMUTE(GTAO_ENABLED)
 PERMUTE(LIGHT_TYPE, CLUSTERED, DIRECTIONAL, POINT, SPOT, AREA_RECT);
 ```
 
@@ -52,4 +59,5 @@ Shipping builds use precompiled shaders. [Packaging](/docs/platforms/packaging.h
 PrecompileShaders.exe --platform=windows
 ```
 
-Add `--api=vulkan` or `--api=dx12` to pick a backend, or `--filter=MyEffect` to limit it to matching shaders.
+Add `--api=vulkan`, `--api=dx12` or `--api=webgpu` to pick a backend, or `--filter=MyEffect` to limit it to matching shaders.
+`--platform` takes `windows`, `mac`, `linux`, `android`, `ios` or `web`.

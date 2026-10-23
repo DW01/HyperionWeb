@@ -7,9 +7,9 @@ summary: Run the game in the editor, standalone or networked.
 
 ## Play, pause, stop
 
-The :icon[play] **Play**, :icon[debug-pause] **Pause** and :icon[debug-stop] **Stop** buttons are at the right end of the toolbar.
+The :icon[play] **Play**, :icon[debug-pause] **Pause** and :icon[debug-stop] **Stop** buttons are near the right end of the toolbar.
 
-Play saves your project first, and Stop restores that saved state, so changes made while playing are discarded.
+Play saves your project first, and Stop restores that saved state, so changes made while playing are discarded. A project that's never been saved asks you to save it before playing.
 
 **Ghost Mode** (in the :icon[settings-gear] gear menu) gives you a free camera while playing. Move it with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>, <kbd>Space</kbd> and <kbd>Ctrl</kbd>.
 
@@ -19,15 +19,17 @@ Pick a mode from the :icon[chevron-down] arrow next to **Play**. The option you 
 
 | Mode | Play button action |
 |---|---|
-| Standalone | The game runs in the editor in single player |
-| Play As Client | The editor connects to the server at **Host**:**Port**. If the host is this machine (`127.0.0.1`, `localhost` or `::1`) and **Auto-launch local server** is on, the editor first starts a headless server running your saved project. Otherwise the server must already be running separately. |
-| Play As Dedicated Server | The editor hosts the game on **Port**. It has no player of its own; players spawn for clients that connect. |
+| Play Local | The game runs in the editor in single player |
+| Play as Client | The editor connects to the server at **Host**:**Port**. Start the server first, separately; see [Running a server](/docs/multiplayer/server.html). |
+| Play as Dedicated Server | The editor hosts the game on **Port**. It has no player of its own; players spawn for clients that connect. |
 
-**Stop** disconnects or stops hosting, and shuts down an auto-launched server
+**Stop** disconnects or stops hosting.
+
+The same menu has **Play in Web Browser**, which builds the game for the web and opens it in your browser. See [Web](/docs/platforms/web.html).
 
 :::note
-Nothing is replicated unless the game's world has the `IsReplicated` flag (on by default).
-But it is something to look into if you're having issues in this area. On your filesystem, open your project's Worlds/MainWorld.hmf file and look for that flag.
+Nothing is replicated unless the game's world has the `IsReplicated` flag. It's part of the world's default flags, so a world saved with `Flags = Default` has it.
+But it is something to look into if you're having issues in this area. On your filesystem, open your project's `Content/Worlds/MainWorld.hmf` file and look at its `Flags`.
 :::
 
 ### Network Settings
@@ -36,14 +38,13 @@ Open **Network Settings...** from the same menu.
 
 | Setting | Default | Used for |
 |---|---|---|
-| Host | `127.0.0.1` | The server Play As Client connects to |
+| Host | `127.0.0.1` | The server Play as Client connects to |
 | Port | `9192` | The game server port, in both networked modes |
-| Cache Server Port | `8081` | Serves your saved project to the auto-launched server and to extra clients |
-| Auto-launch local server | On | Starting a server for Play As Client when Host is this machine |
+| Cache Server Port | `8081` | In Play as Dedicated Server, serves your saved project to clients that connect |
 
 ### More players
 
-The editor is one client. To add more, run the game against the same server, syncing content from the editor's cache server:
+When the editor plays as a dedicated server, run the game against it to add players, syncing content from the editor's cache server:
 
 ```shell
 hyperion-sample --host=127.0.0.1 --gameport=9192 --cacheserver=http://127.0.0.1:8081

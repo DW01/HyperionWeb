@@ -31,14 +31,12 @@ crate->AddComponent<MeshComponent>(meshComponent);
 crate->SetLocalBounds(crateMesh->GetAABB());
 ```
 
-The last line sets the entity's bounds, which culling uses. The other component methods:
+Other component methods:
 
-- `GetComponent<T>()` returns a reference. The component must exist.
+- `GetComponent<T>()` returns a reference. The component must exist!
 - `TryGetComponent<T>()` returns a pointer, or `nullptr` if it's missing.
 - `HasComponent<T>()` checks for one.
 - `RemoveComponent<T>()` removes it.
-
-An entity can only have one of each component type. Adding a second will trip an assert.
 
 ## Transforms
 

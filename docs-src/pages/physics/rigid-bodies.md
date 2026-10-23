@@ -30,24 +30,26 @@ Mass defaults to 0, which makes the body static: other bodies collide with it, b
 | Property | What it does |
 |---|---|
 | mass | Mass of the body, 0 == static, immovable |
-| friction | Surface friction |
-| restitution | Bounciness |
+| friction | Surface friction. Starts at 0.5. |
+| restitution | Bounciness. Starts at 0. |
 
 To give a body a starting velocity, set `initialVelocity` or `initialAngularVelocity` on the component
 
 ## Shapes
 
-The shape defines the collision volume. Make one with **Assets › New... › Physics Shape**, and assign it to the component's collision shape. You can pick from:
+The shape defines the collision volume. Make one with **Assets › Add... › Physics Shape**, and assign it to the component's collision shape. You can pick from:
 
 - **Box**, **Sphere**, **Capsule** and **Plane**.
 - **Convex hull**, wrapped around a mesh.
 - **Compound**, a mesh decomposed into convex pieces. Use this for complex geometry.
 - **Height field**, for terrain.
 
+Plane and height field bodies are always static, whatever their mass.
+
 If no shape is set, a box fitted to the entity's bounds is used.
 
 ## In multiplayer
 
-The server is the authority, and simulates physics for the world, which the clients predict + sync with.
+The server is the authority, and simulates physics for the world.
 
-Clients get replicated bodies' positions and velocities from the server, and interpolate between updates. More in [replication](/docs/multiplayer/replication.html).
+On clients, replicated bodies don't simulate: they follow the positions and velocities the server sends, interpolating between updates. Bodies that aren't replicated are simulated locally on each client. More in [replication](/docs/multiplayer/replication.html).

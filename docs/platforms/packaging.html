@@ -67,6 +67,7 @@
         <li><a href="/docs/platforms/">Platforms</a>
           <ul>
             <li><a href="/docs/platforms/packaging.html" aria-current="page">Packaging a build</a></li>
+            <li><a href="/docs/platforms/web.html">Web</a></li>
             <li><a href="/docs/platforms/android.html">Android</a></li>
             <li><a href="/docs/platforms/ios.html">iOS</a></li>
           </ul>
@@ -80,6 +81,8 @@
         <h1>Packaging a build</h1>
         <p class="lede">Packaging turns your project into a standalone build you can distribute.</p>
 
+<p>The examples on this page describe how to package your game and run it on Windows, but other platforms are nearly the same.</p>
+<p>For macOS/Linux, use the bash scripts where batch scripts would be used. For example, <code>build.bat</code> becomes <code>build.sh</code>. For executables, (<code>MyGame.exe</code>), use <code>MyGame</code> (no extension).</p>
 <h2 id="what-packaging-does">What packaging does</h2>
 <ul>
 <li><strong>Cooks</strong> your project's content, and the engine's, into a compact cache.</li>
@@ -102,12 +105,13 @@
 <p>When it's done, your file browser will open at the output directory.</p>
 <p>Example structure:</p>
 <pre><code>MyGame/
-  MyGame.exe
-  MyGameGame.dll
-  hyperion.dll
-  Cache/
-  Content/
-  Config/
+  Packaged/Build_20261022_153000/
+    MyGame.exe
+    MyGameGame.dll
+    hyperion.dll
+    Cache/
+    Content/
+    Config/
 </code></pre>
 <p>Run <code>MyGame.exe</code> to start your game.</p>
 <p><img class="docs-shot" src="/assets/docs-packaged-game.jpg" alt="The packaged game running in its own window" width="1280" height="750" loading="lazy"></p>
@@ -136,6 +140,30 @@
 </table>
 </div>
 <p>The game starts in the world you had open when you packaged it, in single player. Both are set in <code>Config/GlobalConfig.json</code>.</p>
+<p>A C# game is compiled ahead of time with NativeAOT, so the package runs on a machine without .NET installed.</p>
+<p>To package this, you need the .NET 10 SDK, and on Windows, Visual Studio or the Build Tools with the <strong>Desktop development with C++</strong> workload.</p>
+<div class="docs-note">
+<p>Packaging from the editor builds for the platform the editor is running on. For the browser, use <strong>Build › Package for Web</strong>. See <a href="/docs/platforms/web.html">Web</a>.</p>
+</div>
+<h3 id="packaging-settings">Packaging settings</h3>
+<p><strong>Build › Packaging Settings...</strong> has settings for the cook, saved with your project:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max Texture Size</td>
+<td>The largest texture dimension in the cooked game. Bigger textures are scaled down. 0 means no limit.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Defaults</strong> apply everywhere. Use <strong>Platform Override</strong> to change a setting for one platform; anything you don't override follows the defaults. New projects start with overrides for the web (256), iOS (512) and Android (512).</p>
 <h3 id="multiplayer">Multiplayer</h3>
 <p>The packaged game hosts and joins games with the same flags as the <a href="/docs/editor/build-game.html#run-it">built one</a>:</p>
 <pre><code class="language-shell">MyGame --server # start a standalone server
@@ -150,7 +178,7 @@ MyGame --singleplayer=false --host=127.0.0.1 # connect to a server
 </code></pre>
 </li>
 <li>
-<p>Run the packaging script from the root of the repo:</p>
+<p>Run the packaging script from the root of the repo. It makes its own shipping build, with Clang and Ninja, so you'll need both:</p>
 <pre><code class="language-shell">Tools\Scripts\PackageBuildWindows.bat
 </code></pre>
 </li>
@@ -163,14 +191,16 @@ MyGame --singleplayer=false --host=127.0.0.1 # connect to a server
 <p>The Windows package includes Steam's test app files (app ID 480) so Steam features work while you're developing. Swap in your own app ID before you ship.</p>
 </div>
 <h3 id="other-platforms">Other platforms</h3>
-<p>There are matching scripts for macOS, iOS and Android in <code>Tools/Scripts/</code>. Android has its own page: <a href="/docs/platforms/android.html">Android</a>. The macOS and iOS scripts are still a work in progress.</p>
+<p>There are matching scripts for macOS (<code>PackageBuildMacOS.sh</code>), iOS (<code>PackageBuildIOS.sh</code>), Android (<code>PackageBuildAndroid.bat</code>) and the web (<code>PackageBuildWeb.bat</code>) in <code>Tools/Scripts/</code>. Android, iOS and the web have their own pages:
+<a href="/docs/platforms/android.html">Android</a>, <a href="/docs/platforms/ios.html">iOS</a> and <a href="/docs/platforms/web.html">Web</a>.</p>
+<p>The macOS and iOS scripts are still a work in progress.</p>
 <h2 id="about-shipping-builds">About shipping builds</h2>
 <p>To make a shipping build without packaging it:</p>
 <pre><code class="language-shell">build.bat Shipping
 </code></pre>
 <p>It goes into <code>Binaries/&lt;Platform&gt;/Shipping/</code>, without the editor, tests or commandlets.</p>
       </article>
-      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/"><span>Previous</span>Platforms</a><a class="next" href="/docs/platforms/android.html"><span>Next</span>Android</a></nav>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/platforms/"><span>Previous</span>Platforms</a><a class="next" href="/docs/platforms/web.html"><span>Next</span>Web</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/platforms/packaging.md" rel="noopener">Improve this page on GitHub</a></p>
     </main>
 

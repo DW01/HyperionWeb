@@ -10,14 +10,37 @@ summary: Attach a script to an entity and make it move.
 ::: steps
 1. Select an entity in the **Scene** panel.
 
-2. In the **Inspector**, find the **Script** section and click :icon[add] (**Create new script**).
+2. In the **Inspector**, find the **Script** section, open its **More actions** menu, and pick :icon[add] **Create New Script**.
 
-3. Choose **Strata** or **C#**, and give it a name.
+3. Choose the language of the script, and give it a name.
 :::
 
-The editor adds a `ScriptComponent` to the entity, and saves the file to `Scripts/<Name>.strata` or `Scripts/<Name>.cs` in your project. The new script looks like this:
+::: note
+Strata is temporarily disabled in current builds, so only C# is offered for now.
+:::
+
+The editor adds a `ScriptComponent` to the entity, and saves the file to `Content/Scripts/<Name>.strata` or `Content/Scripts/<Name>.cs` in your project. The new script looks like this:
 
 ::: tabs
+```csharp
+using Hyperion;
+
+public class NewScript : Script
+{
+    public override void OnAdded(Entity entity)
+    {
+    }
+
+    public override void Update(float deltaTime)
+    {
+    }
+
+    public override void Destroy()
+    {
+    }
+}
+```
+
 ```strata
 import Engine;
 
@@ -37,24 +60,6 @@ void Destroy()
 }
 ```
 
-```csharp
-using Hyperion;
-
-public class NewScript : Script
-{
-    public override void OnAdded(Entity entity)
-    {
-    }
-
-    public override void Update(float deltaTime)
-    {
-    }
-
-    public override void Destroy()
-    {
-    }
-}
-```
 :::
 
 In C#, the class is named after the script.
@@ -78,21 +83,6 @@ Each entity gets its own copy of the script's state: its own Strata globals, or 
 This moves the entity upward while the game runs:
 
 ::: tabs
-```strata
-import Engine;
-
-Entity g_entity;
-
-void OnAdded(const Entity entity)
-{
-    g_entity = entity;
-}
-
-void Update(float delta)
-{
-    g_entity.Translate(float3(0.0, delta, 0.0));
-}
-```
 
 ```csharp
 using Hyperion;
@@ -110,12 +100,30 @@ public class NewScript : Script
     }
 }
 ```
+
+```strata
+import Engine;
+
+Entity g_entity;
+
+void OnAdded(const Entity entity)
+{
+    g_entity = entity;
+}
+
+void Update(float delta)
+{
+    g_entity.Translate(float3(0.0, delta, 0.0));
+}
+```
 :::
 
 In C#, calling `base.OnAdded(entity)` sets the script's `Entity` property. The editor's template leaves it out, so add it when you want to use `Entity`.
 
 ## Live reload
 
-Saving the file recompiles it in the editor, in either language. Entities using the script get `Destroy`, the new code is loaded, and `OnAdded` runs again.
+Saving the file recompiles it in the editor, in either language. While playing, entities using the script get `Destroy`, the new code is loaded, and `OnAdded` runs again.
 
 Script state is reset on reload.
+
+If a script throws, it's marked as errored and stops getting `Update` calls, until the script runs without throwing.

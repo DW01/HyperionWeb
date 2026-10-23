@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Global illumination · Hyperion Docs</title>
-  <meta name="description" content="Global illumination options in Hyperion Engine: baked lightmaps, Glimmer realtime GI, SSR, HBAO, ray-traced DDGI and reflections, and the console variables that toggle them.">
+  <meta name="description" content="Global illumination options in Hyperion Engine: baked lightmaps, Glimmer realtime GI, SSR, GTAO, ray-traced DDGI and reflections, and the console variables that toggle them.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/rendering/global-illumination.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Global illumination · Hyperion Docs">
-  <meta property="og:description" content="Global illumination options in Hyperion Engine: baked lightmaps, Glimmer realtime GI, SSR, HBAO, ray-traced DDGI and reflections, and the console variables that toggle them.">
+  <meta property="og:description" content="Global illumination options in Hyperion Engine: baked lightmaps, Glimmer realtime GI, SSR, GTAO, ray-traced DDGI and reflections, and the console variables that toggle them.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/rendering/global-illumination.html">
   <meta property="og:image" content="/assets/terrain-agx.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -64,6 +64,7 @@
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a>
           <ul>
             <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/lights.html">Lights &amp; shadows</a></li>
             <li><a href="/docs/rendering/baking.html">Baking lighting</a></li>
             <li><a href="/docs/rendering/global-illumination.html" aria-current="page">Global illumination</a></li>
             <li><a href="/docs/rendering/shaders.html">Writing shaders</a></li>
@@ -100,7 +101,7 @@
 </tr>
 <tr>
 <td>Glimmer</td>
-<td>Realtime bounce light and sky occlusion, traced in software. Desktop only. On by default.</td>
+<td>Realtime bounce light and sky occlusion, traced in software. On by default, off on mobile.</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
@@ -114,7 +115,7 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>HBAO</td>
+<td>GTAO</td>
 <td>Soft shadows in corners and crevices.</td>
 <td style="text-align:center"></td>
 </tr>
@@ -131,18 +132,22 @@
 </tbody>
 </table>
 </div>
-<p>These can be combined. A typical setup is baked lightmaps and probes, with SSR and HBAO on top.</p>
+<p>These can be combined. A typical setup is baked lightmaps and probes, with SSR and GTAO on top.</p>
 <h2 id="glimmer">Glimmer</h2>
-<p>Glimmer is Hyperion's own realtime GI. It traces rays in compute shaders rather than with ray tracing hardware, and nothing needs baking: move the sun or a wall and the bounce light follows. It runs on desktop: Windows and macOS, on both Vulkan and DirectX 12.</p>
+<p>Glimmer is Hyperion's own realtime GI. It traces rays in compute shaders rather than with ray tracing hardware, and runs on DirectX 12, Vulkan (Windows and macOS) and WebGPU. Nothing needs baking: move the sun or a wall and the bounce light follows.</p>
+<p>It's built for static geometry. Moving objects receive its light, but don't affect it.</p>
 <ul>
-<li>Near the camera it traces against the scene's meshes; terrain and the distance use a cheaper heightfield.</li>
-<li>Probes are placed around solid geometry, so light doesn't leak through walls.</li>
+<li>Near the camera, probes trace against the scene's meshes. They're placed around solid geometry, so light doesn't leak through walls.</li>
+<li>Further out, a coarser grid traces a voxelized version of the scene, plus a heightfield for terrain.</li>
+<li>Changing the sun or sky relights the scene without tracing it again.</li>
+<li>Static point and spot lights add their bounce light</li>
 <li>Lightmapped surfaces keep their lightmaps. Glimmer lights everything else.</li>
 <li>Sky reflections are dimmed where the sky is blocked, so interiors don't glow with sky color.</li>
 </ul>
 <p>It's meant for large outdoor worlds, where baking isn't practical. Turn it off per world with <strong>Glimmer GI</strong> in <strong>World Settings</strong>, or scale it with <code>Rendering.Glimmer.Intensity</code>.</p>
+<p>On lower-end devices and on the web, the near-field probes are turned off and only the coarser grid is used. See <a href="/docs/platforms/#device-tiers">device tiers</a>.</p>
 <h2 id="toggles">Toggles</h2>
-<p>Each has a console variable. Toggle them from the <a href="/docs/editor/console.html">console</a>; defaults are set in <code>Config/EngineConfig.json</code>:</p>
+<p>Each has a console variable. Toggle them from the <a href="/docs/editor/console.html">console</a>; <code>Config/EngineConfig.json</code> and the <a href="/docs/platforms/#device-tiers">device tiers</a> can change their defaults:</p>
 <div class="docs-table-wrap">
 <table class="docs-table">
 <thead>
@@ -162,23 +167,23 @@
 </tr>
 <tr>
 <td>Rendering.SSGI</td>
-<td>SSGI</td>
+<td>SSGI. Off in the default config.</td>
 </tr>
 <tr>
 <td>Rendering.SSR</td>
-<td>SSR</td>
+<td>SSR. Off in the default config.</td>
 </tr>
 <tr>
-<td>Rendering.HBAO</td>
-<td>HBAO</td>
+<td>Rendering.GTAO</td>
+<td>GTAO</td>
 </tr>
 <tr>
 <td>Rendering.DDGI</td>
-<td>DDGI</td>
+<td>DDGI. Off by default.</td>
 </tr>
 <tr>
 <td>Rendering.RayTracing.RayTracedReflections</td>
-<td>RT reflections</td>
+<td>RT reflections. Off by default.</td>
 </tr>
 </tbody>
 </table>

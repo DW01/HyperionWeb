@@ -64,6 +64,7 @@
         <li><a href="/docs/rendering/">Rendering &amp; lighting</a>
           <ul>
             <li><a href="/docs/rendering/materials.html">Materials</a></li>
+            <li><a href="/docs/rendering/lights.html">Lights &amp; shadows</a></li>
             <li><a href="/docs/rendering/baking.html">Baking lighting</a></li>
             <li><a href="/docs/rendering/global-illumination.html">Global illumination</a></li>
             <li><a href="/docs/rendering/shaders.html" aria-current="page">Writing shaders</a></li>
@@ -83,10 +84,15 @@
         <p class="lede">Shaders are written in HLSL and compiled with DXC for every backend. The editor reloads them automatically when they change.</p>
 
 <h2 id="adding-a-shader">Adding a shader</h2>
-<p>Shaders live in <code>Source/Shaders/</code>. Write your <code>.hlsl</code> file, then register it in <code>Config/Shaders.hmf</code>:</p>
-<pre><code>ShaderDefinition &quot;MyEffect&quot; {
-    VS = &quot;MyEffect/MyEffect.hlsl&quot;
-    PS = &quot;MyEffect/MyEffect.hlsl&quot;
+<p>Shaders live in <code>Source/Shaders/</code>. Write your <code>.hlsl</code> file, then add it to the <code>Definitions</code> list in <code>Config/Shaders.hmf</code>:</p>
+<pre><code>ShaderDefinitions &quot;ShaderDefinitions&quot; {
+    Definitions = [
+        ...
+        ShaderDefinition &quot;MyEffect&quot; {
+            VS = &quot;MyEffect/MyEffect.hlsl&quot;
+            PS = &quot;MyEffect/MyEffect.hlsl&quot;
+        }
+    ]
 }
 </code></pre>
 <p>Paths are relative to <code>Source/Shaders/</code>. The keys are the stages:</p>
@@ -118,9 +124,10 @@
 </tbody>
 </table>
 </div>
+<p><code>Condition = &quot;Rendering.FogVolumes&quot;</code> (any bool CVar) only compiles and uses the shader while that CVar is on.</p>
 <h2 id="permutations">Permutations</h2>
 <p>Shader variants are declared at the top of the file:</p>
-<pre><code class="language-hlsl">PERMUTE(HBAO_ENABLED)
+<pre><code class="language-hlsl">PERMUTE(GTAO_ENABLED)
 PERMUTE(LIGHT_TYPE, CLUSTERED, DIRECTIONAL, POINT, SPOT, AREA_RECT);
 </code></pre>
 <p>With just a name, it's an on/off variant. With a list of values, each variant defines one of them, such as <code>LIGHT_TYPE_POINT</code>:</p>
@@ -133,7 +140,8 @@ PERMUTE(LIGHT_TYPE, CLUSTERED, DIRECTIONAL, POINT, SPOT, AREA_RECT);
 <p>Shipping builds use precompiled shaders. <a href="/docs/platforms/packaging.html">Packaging</a> does this automatically. To run it yourself:</p>
 <pre><code class="language-shell">PrecompileShaders.exe --platform=windows
 </code></pre>
-<p>Add <code>--api=vulkan</code> or <code>--api=dx12</code> to pick a backend, or <code>--filter=MyEffect</code> to limit it to matching shaders.</p>
+<p>Add <code>--api=vulkan</code>, <code>--api=dx12</code> or <code>--api=webgpu</code> to pick a backend, or <code>--filter=MyEffect</code> to limit it to matching shaders.
+<code>--platform</code> takes <code>windows</code>, <code>mac</code>, <code>linux</code>, <code>android</code>, <code>ios</code> or <code>web</code>.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/rendering/global-illumination.html"><span>Previous</span>Global illumination</a><a class="next" href="/docs/rendering/post-processing.html"><span>Next</span>Post-processing</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/rendering/shaders.md" rel="noopener">Improve this page on GitHub</a></p>

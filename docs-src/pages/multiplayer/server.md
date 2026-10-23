@@ -13,19 +13,23 @@ The game executable runs as a server with `--server`:
 hyperion-sample --server --gameport=9192
 ```
 
-It runs headless (no window), and reads console commands from its terminal. Leave off `--gameport` and it uses the `Net.GameServerPort` CVar, which defaults to 9192.
+It runs headless (no window), and reads console commands from its terminal. Leave off `--gameport` and it uses the `Net.GameServerPort` CVar, which defaults to 9192. A headless server ticks at up to 60 times a second, set with `Sim.HeadlessTickRate`.
+
+Add `--startupworld=<WorldName>` to pick the world it starts in.
 
 ## Connect a client
 
-Run the game executable with `--host` and `--autoconnect=true` cli args to automatically connect to a host at that address. If you don't pass `autoconnect` or pass it as `false`, a prompt screen will be shown that will allow your to change it before connecting or select Single Player instead (NOTE: to be changed - will automatically connect if --host is passed)
+Run the game executable with `--host` to connect to the server at that address:
 
 ```shell
-hyperion-sample --host=127.0.0.1 --autoconnect=true --gameport=9192
+hyperion-sample --host=127.0.0.1 --gameport=9192
 ```
+
+With `--autoconnect=false`, or without `--host`, it shows a screen where you can change the address before connecting, or pick Single Player instead.
 
 ## Your own game
 
-A game [built from the editor](/docs/editor/build-game.html) takes the same flags. It starts in single player by default, unless `--singleplayer=false` is passed.
+A game [built from the editor](/docs/editor/build-game.html) takes the same flags. It starts in single player by default, because its `Config/GlobalConfig.json` passes `--singleplayer`. Pass `--singleplayer=false` to override it.
 
 For example:
 

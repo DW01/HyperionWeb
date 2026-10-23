@@ -10,14 +10,14 @@ summary: Bloom, TAA, tonemapping, exposure and fog.
 | Effect | Notes |
 |---|---|
 | Bloom | Glow around bright areas. Tuned with `Rendering.BloomThreshold` and `Rendering.BloomIntensity`. |
-| TAA | Smooths out jagged edges over a few frames. |
-| Tonemapping | AgX, AgX Punchy, ACES, PBR Neutral or Reinhard. |
-| Exposure and color | Exposure compensation, white balance, saturation and contrast. |
+| TAA | Smooths out jagged edges over a few frames. Runs on the HDR image, before bloom and tonemapping. |
+| Tonemapping | AgX, AgX Punchy (the default), ACES, PBR Neutral or Reinhard. |
+| Exposure and color | Exposure compensation, white balance, tint, saturation, contrast and vignette. |
 | Fog and clouds | Height fog, fog volumes and clouds. |
 
 ## Per-world settings
 
-Tonemapping, exposure, color, fog and clouds are per-world settings, under **World Settings** in the :icon[settings-gear] gear menu.
+Tonemapping, exposure, color, fog and clouds are per-world settings, under **World Settings** in the :icon[settings-gear] gear menu, along with the sky, sky light and wind.
 
 ## Toggles
 
@@ -29,3 +29,5 @@ The heavier effects can be toggled with [console variables](/docs/editor/console
 | Rendering.TAA | TAA |
 | Rendering.FogVolumes | Fog volumes |
 | Rendering.Clouds | Clouds |
+
+On mobile, bloom, clouds and fog volumes are off by default. See [device tiers](/docs/platforms/#device-tiers).

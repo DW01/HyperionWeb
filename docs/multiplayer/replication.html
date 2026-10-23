@@ -108,6 +108,10 @@
 <td>Net.DeadReckoning</td>
 <td>Turns dead reckoning on or off.</td>
 </tr>
+<tr>
+<td>Net.InterpRatio</td>
+<td>Stays at least this many update intervals behind, if that's more than <code>Net.InterpolationDelay</code>. Starts at 2.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -124,11 +128,11 @@
 <p>The client compares that with its prediction and corrects any difference.</p>
 </li>
 </ol>
-<p>If the client and server end up too far apart (more than <code>Net.CorrectionThreshold</code>), the client smoothly corrects over <code>Net.CorrectionSmoothingTime</code>.</p>
+<p>When they disagree, the client rewinds to the server's position, replays the moves the server hasn't acknowledged yet, and smooths out the difference over at least <code>Net.CorrectionSmoothingTime</code> (0.1 seconds to start). If they're more than <code>Net.CorrectionThreshold</code> apart (4 units to start), it's treated as a teleport and snaps straight there.</p>
 <h2 id="authority">Authority</h2>
 <p>The server has authority. So does a game that isn't connected to anything, like single player. On clients, replicated physics bodies are driven by server updates.</p>
 <h2 id="not-yet-supported">Not yet supported</h2>
-<p>There are no RPCs yet, and you can't replicate individual properties. Replication currently covers whole entities and their transforms.</p>
+<p>There are no RPCs yet, and you can't replicate individual properties or components. Replication currently covers which entities exist (their class, name, parent and scene) and their transforms.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/multiplayer/server.html"><span>Previous</span>Running a server</a><a class="next" href="/docs/platforms/"><span>Next</span>Platforms</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/multiplayer/replication.md" rel="noopener">Improve this page on GitHub</a></p>

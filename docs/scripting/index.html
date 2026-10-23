@@ -80,14 +80,11 @@
         <h1>Scripting</h1>
         <p class="lede">Gameplay scripts can be written in Strata or C#</p>
 
-<p>Each script picks its language when you create it, and a project can use both languages - you aren't boxed into just one</p>
-<h2 id="what-is-strata">What is Strata?</h2>
-<p>You probably haven't heard of Strata - because it's a new project aimed at creating a simple, C-type language meant for scripting (separate from Hyperion).</p>
-<p>Strata is statically typed and compiled, with no garbage collector, ref counting or manual memory management - the <a href="/strata.html">Strata overview</a> covers the syntax</p>
+<p>Hyperion supports scripting with C#. Scripts can be attached to individual objects to define behaviour.</p>
 <h2 id="exposing-c-to-scripts">Exposing C++ to scripts</h2>
 <p>Engine types show up in both languages through reflection. Add a class in C++ with reflection macros, and Hyperion's CodeGenTool generates binding code so you can use it in scripts.</p>
 <pre><code class="language-cpp">HYP_CLASS()
-class Camera : public ObjectBase
+class Camera : public Entity
 {
     HYP_OBJECT_BODY(Camera);
 public:
@@ -98,15 +95,13 @@ public:
     void SetFOV(float v);
 };
 </code></pre>
+<h2 id="in-shipped-games">In shipped games</h2>
+<p>When you <a href="/docs/platforms/packaging.html">package</a> a game, C# scripts are compiled ahead of time with NativeAOT, so the game doesn't need .NET installed.</p>
 <h2 id="in-this-section">In this section</h2>
 <ul class="docs-links">
   <li><a href="/docs/scripting/first-script.html">Your first script</a><span>Attach a script to an entity and make it move.</span></li>
   <li><a href="/docs/scripting/engine-bindings.html">Calling engine code</a><span>How engine types show up in Strata and C#, and how to expose your own.</span></li>
   <li><a href="/docs/scripting/samples.html">Samples</a><span>Example scripts</span></li>
-</ul>
-<h2 id="todo">TODO</h2>
-<ul class="docs-soon">
-<li>Shipping builds (ahead-of-time compiled scripts)</li>
 </ul>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/world/swatches.html"><span>Previous</span>Swatches</a><a class="next" href="/docs/scripting/first-script.html"><span>Next</span>Your first script</a></nav>
@@ -116,10 +111,9 @@ public:
     <aside class="docs-toc" aria-label="On this page">
       <p class="docs-toc-title">Table of contents</p>
       <ul>
-        <li><a href="#what-is-strata">What is Strata?</a></li>
         <li><a href="#exposing-c-to-scripts">Exposing C++ to scripts</a></li>
+        <li><a href="#in-shipped-games">In shipped games</a></li>
         <li><a href="#in-this-section">In this section</a></li>
-        <li><a href="#todo">TODO</a></li>
       </ul>
     </aside>
   </div>

@@ -149,10 +149,10 @@ You can only change this when there are no changed files after generating the pr
 <p><code>MyGame.exe</code> runs the game on its own, loading content straight from the project folder. It takes the same command line as a C++ game; see <a href="/docs/editor/build-game.html#run-it">Run it</a>.</p>
 <h2 id="play-it-in-the-editor">Play it in the editor</h2>
 <p>Press <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="docs-icon" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg> <strong>Play</strong>. The editor loads <code>MyGame.dll</code> and runs your <code>Game</code> class in <a href="/docs/editor/play-in-editor.html">play-in-editor</a>.</p>
-<p><img class="docs-shot" src="/assets/docs-csharp-play.jpg" alt="The example running in the editor: cubes circling the player" width="1536" height="644" loading="lazy"></p>
-<p>There's no hot reload for the game project. The editor keeps using the build it first loaded, so after rebuilding, restart the editor to see your changes.</p>
+<p><img class="docs-shot" src="/assets/docs-csharp-play.jpg" alt="The example running in the editor" width="1536" height="644" loading="lazy"></p>
 <h2 id="package">Package</h2>
-<p><strong>Build › Package Game</strong> works the same as for C++. The build includes the .NET runtime, so the packaged game runs on a machine without .NET installed. See <a href="/docs/platforms/packaging.html">Packaging a build</a>.</p>
+<p><strong>Build › Package Game</strong> works the same as for C++. Your project will be compiled with NativeAOT, meaning it will be able to run on players' machines without needing them to have .NET installed!</p>
+<p>To build on Windows, that needs Visual Studio or the Build Tools with the <strong>Desktop development with C++</strong> workload. For other platforms, you also need the appropriate build tools. See <a href="/docs/platforms/packaging.html">Packaging a build</a>.</p>
       </article>
       <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/editor/play-in-editor.html"><span>Previous</span>Play-in-editor</a><a class="next" href="/docs/editor/console.html"><span>Next</span>Console &amp; CVars</a></nav>
       <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/editor/build-game-csharp.md" rel="noopener">Improve this page on GitHub</a></p>

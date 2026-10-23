@@ -18,6 +18,8 @@ Rendering.SSGI false
 
 Bools take `true` / `false` (or `1` / `0`), numbers and strings work as well
 
+As you type, the console suggests CVar and commandlet names. Use <kbd>Up</kbd> and <kbd>Down</kbd> to pick one, <kbd>Tab</kbd> to fill it in, and <kbd>Esc</kbd> to dismiss the list.
+
 ::: note
 There's no full list yet. To find them all, search the codebase for the regex `^CVar<([A-Za-z_]+)>`.
 :::
