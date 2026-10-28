@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AnimToolkit · Hyperion Docs</title>
+  <meta name="description" content="The AnimToolkit plugin for Hyperion Engine: skeletal animation, animation graphs, character models, retargeting and the animation editor.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/plugins/animtoolkit.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="AnimToolkit · Hyperion Docs">
+  <meta property="og:description" content="The AnimToolkit plugin for Hyperion Engine: skeletal animation, animation graphs, character models, retargeting and the animation editor.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/plugins/animtoolkit.html">
+  <meta property="og:image" content="/assets/terrain-agx.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="nav-icon" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+        <a class="nav-icon" href="https://discord.gg/Fv8PwMJEUb" rel="noopener" aria-label="Hyperion Engine on Discord" title="Discord"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <button type="button" class="docs-search-open">Search<kbd>/</kbd></button>
+      <p class="docs-nav-label">Docs</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scene management</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/plugins/">Plugins</a>
+          <ul>
+            <li><a href="/docs/plugins/animtoolkit.html" aria-current="page">AnimToolkit</a></li>
+            <li><a href="/docs/plugins/creating-a-plugin.html">Creating your own plugin</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <article class="docs-article">
+        <h1>AnimToolkit</h1>
+        <p class="lede">Everything for animated characters: playing clips, blending them with graphs, and editing them in the editor.</p>
+
+<div class="docs-note">
+<p>This doc is a work in progress.</p>
+</div>
+<p>AnimToolkit includes two modules. <strong>Animation</strong>, which your game uses at runtime, and <strong>AnimationEditor</strong>, which only the editor loads, for in-editor tooling.</p>
+<div class="docs-note">
+<p>Without the plugin, skinned meshes still import and draw in their bind pose, and clips still import as assets. They just don't play.</p>
+</div>
+<h2 id="playing-a-clip">Playing a clip</h2>
+<p>Add an <code>AnimationComponent</code> to an entity with a skinned mesh. Pick a clip under <code>Animation</code>, and tick <code>PlayOnStart</code> to have it play when the game starts.</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Animation</td>
+<td>The clip to play. The list only shows clips that fit the entity's skeleton.</td>
+</tr>
+<tr>
+<td>PlayOnStart</td>
+<td>Start playing when the game starts.</td>
+</tr>
+<tr>
+<td>LoopMode</td>
+<td>Whether the clip plays once or loops.</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Playback speed. 1 is normal.</td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>An animation graph to run instead of a single clip. See below.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Importing a model with animations adds the <code>AnimationComponent</code> for you, set to the first clip. You can turn that off in the import settings with <code>AddAnimationComponent</code>.</p>
+<p>If a clip was made for a different skeleton, or there's no skeleton at all, the Inspector shows a warning.</p>
+<h2 id="animation-graphs">Animation graphs</h2>
+<p>An animation graph decides which pose a character shows. Instead of switching clips by hand, you build a graph once, then drive it with a few <strong>parameters</strong> like <code>Speed</code> or <code>Jump</code> from your game.</p>
+<p>Create one from <strong>Assets › Add... › Animation Graph</strong>. Double-click a graph in <strong>Assets</strong> to open it.</p>
+<h3 id="nodes">Nodes</h3>
+<p>A graph is a set of nodes that each produce a pose. Wire them together and mark one as the <strong>output</strong>.</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Node</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clip</td>
+<td>Plays a clip, with a play rate, looping and a start offset.</td>
+</tr>
+<tr>
+<td>Blend1D</td>
+<td>Blends clips placed along one parameter, like idle, walk and run on speed.</td>
+</tr>
+<tr>
+<td>Blend2D</td>
+<td>Blends clips over two parameters, like forward and sideways velocity.</td>
+</tr>
+<tr>
+<td>Layer</td>
+<td>Plays one pose over another, only on the bones in a <strong>bone mask</strong>.</td>
+</tr>
+<tr>
+<td>Additive</td>
+<td>Adds a pose on top of a base pose.</td>
+</tr>
+<tr>
+<td>ChainTwist</td>
+<td>Twists a chain of bones, for aiming.</td>
+</tr>
+<tr>
+<td>Slot</td>
+<td>A place for gameplay to play a one-off clip, like an emote, over the graph.</td>
+</tr>
+<tr>
+<td>FootIK</td>
+<td>Plants the feet on the ground.</td>
+</tr>
+<tr>
+<td>StateMachine</td>
+<td>Moves between states, each with its own pose.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Clips in a <strong>sync group</strong> share their phase, so blended walk and run cycles keep their feet in step.</p>
+<h3 id="state-machines">State machines</h3>
+<p>Double-click a StateMachine node to open it. States are boxes and transitions are arrows. Right-click a state and pick <strong>Make Transition</strong>, then click the state it leads to.</p>
+<p>Each transition has a duration, a blend curve, a priority, and conditions that read like sentences: <code>Speed &gt; 0.5</code>, <code>Jump is triggered</code>, <code>time in state &gt;= 0.3s</code>.</p>
+<h3 id="parameters">Parameters</h3>
+<p>The Parameters panel lists the values your game sets. They can be floats, bools, triggers or vectors. While you're editing, drag a value and watch the preview character blend.</p>
+<h2 id="character-models">Character models</h2>
+<p><code>CharacterModelComponent</code> drives a character from its character controller. It works out speed, direction, whether it's in the air and so on, and feeds them to the graph. It also handles which way the character faces, turn-in-place steps and aiming.</p>
+<p>By default it runs the built-in <code>HumanoidMotionMatching</code> graph, so a humanoid character animates with no setup. To use your own, set <code>Graph</code>.</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Graph</td>
+<td>The animation graph to run.</td>
+</tr>
+<tr>
+<td>FacingMode, TurnSharpness</td>
+<td>Which way the body faces, and how quickly it turns to it.</td>
+</tr>
+<tr>
+<td>AlignToCapsule, ModelOffset</td>
+<td>Where the model sits inside the character controller's capsule.</td>
+</tr>
+<tr>
+<td>FootIK</td>
+<td>Plants the feet on uneven ground. <code>FootProbeHeight</code>, <code>FootProbeDepth</code> and <code>FootIKSmoothing</code> tune it.</td>
+</tr>
+<tr>
+<td>ApplyRootMotion</td>
+<td>Moves the character with the motion baked into the clip.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="humanoids-and-retargeting">Humanoids and retargeting</h2>
+<p>A skeleton can be marked as a <strong>humanoid</strong> by mapping its bones to standard slots like hips, spine and the arm and leg chains. The editor can map common rigs for you.</p>
+<p>Once two skeletons are mapped, a clip made for one plays on the other. Rotations carry over bone by bone, and the hips movement is scaled to fit the new character's height.</p>
+<h2 id="bone-attachments">Bone attachments</h2>
+<p>Put a <code>BoneAttachmentComponent</code> on an entity to make it follow a bone or <strong>socket</strong> of another character, like a sword in a hand. Sockets are named points on a skeleton, with an offset from their bone.</p>
+<h2 id="using-it-from-the-editor">Using it from the editor</h2>
+<h3 id="editing-animation">Editing animation</h3>
+<p>Right-click an animated entity and pick <strong>Edit Animation</strong>, or double-click a skeleton or clip in <strong>Assets</strong>. The editor opens a preview of the character:</p>
+<ul>
+<li>the hierarchy shows its bones, and you can add sockets to them;</li>
+<li>a timeline bar under the viewport plays the clip and lets you scrub and add markers;</li>
+<li><strong>Show Bones</strong> in the tools menu draws the skeleton in the viewport.</li>
+</ul>
+<p>Make your changes, then <strong>Apply</strong> to save them or <strong>Revert</strong> to throw them away.</p>
+<h3 id="editing-a-graph">Editing a graph</h3>
+<p>Right-click an entity and pick <strong>Edit Animation Graph</strong>, or double-click a graph in <strong>Assets</strong>. The graph opens in the bottom dock beside <strong>Assets</strong> and <strong>Console</strong>, with the viewport and preview character above it.</p>
+<ul>
+<li>Press <kbd>Space</kbd> on the canvas to search for a node to add.</li>
+<li>Select a node to edit its settings in the main <strong>Inspector</strong>.</li>
+<li>Press <kbd>Home</kbd> to frame the whole graph.</li>
+</ul>
+<p>Graphs that come with the engine are read-only. Use <strong>Copy to Project</strong> to get an editable copy that's assigned to your character.</p>
+<h3 id="debugging-while-playing">Debugging while playing</h3>
+<p>On a <code>CharacterModelComponent</code> or <code>AnimationComponent</code>, <strong>Open Graph</strong> attaches the graph to the running character. The current state, running transitions and node weights light up as you play, and the Parameters panel shows live values.</p>
+<ul class="docs-soon">
+<li>Picking which character to debug</li>
+<li>Opening a new graph as soon as it's created</li>
+</ul>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/plugins/"><span>Previous</span>Plugins</a><a class="next" href="/docs/plugins/creating-a-plugin.html"><span>Next</span>Creating your own plugin</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/plugins/animtoolkit.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">Table of contents</p>
+      <ul>
+        <li><a href="#playing-a-clip">Playing a clip</a></li>
+        <li><a href="#animation-graphs">Animation graphs</a></li>
+        <li><a href="#character-models">Character models</a></li>
+        <li><a href="#humanoids-and-retargeting">Humanoids and retargeting</a></li>
+        <li><a href="#bone-attachments">Bone attachments</a></li>
+        <li><a href="#using-it-from-the-editor">Using it from the editor</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <dialog class="docs-search" aria-label="Search the docs">
+    <div class="docs-search-box">
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false">
+      <p class="docs-search-status" role="status"></p>
+      <ul class="docs-search-results"></ul>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

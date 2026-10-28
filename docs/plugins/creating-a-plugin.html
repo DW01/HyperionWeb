@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creating your own plugin · Hyperion Docs</title>
+  <meta name="description" content="Writing a plugin for Hyperion Engine.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/plugins/creating-a-plugin.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Creating your own plugin · Hyperion Docs">
+  <meta property="og:description" content="Writing a plugin for Hyperion Engine.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/plugins/creating-a-plugin.html">
+  <meta property="og:image" content="/assets/terrain-agx.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="nav-icon" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+        <a class="nav-icon" href="https://discord.gg/Fv8PwMJEUb" rel="noopener" aria-label="Hyperion Engine on Discord" title="Discord"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <button type="button" class="docs-search-open">Search<kbd>/</kbd></button>
+      <p class="docs-nav-label">Docs</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scene management</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/plugins/">Plugins</a>
+          <ul>
+            <li><a href="/docs/plugins/animtoolkit.html">AnimToolkit</a></li>
+            <li><a href="/docs/plugins/creating-a-plugin.html" aria-current="page">Creating your own plugin</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <article class="docs-article">
+        <h1>Creating your own plugin</h1>
+        <p class="lede">Writing a plugin for Hyperion Engine.</p>
+
+<div class="docs-note">
+<p>Plugins are built with the engine for now, so you can develop yours inside of the engine's <code>Source/Plugins</code> folder alongside other built-in plugins.</p>
+</div>
+<h2 id="layout">Layout</h2>
+<p>Make a folder in <code>Source/Plugins</code> named after your plugin:</p>
+<pre><code class="language-text">MyPlugin/
+  MyPlugin.hypplugin
+  Source/
+    MyPlugin/          runtime module
+    MyPluginEditor/    editor module (optional)
+  Managed/             C# (optional)
+  Content/             assets (optional)
+  Tests/
+</code></pre>
+<p>Every folder under <code>Source</code> is a <em>module</em>, and the engine's build finds each of them.
+Ensure you run the build script (<code>build.bat</code> / <code>build.sh</code>)  and press <code>Y</code> to reconfigure CMake after adding one, as well as when you add or remove a file/folder in here.</p>
+<div class="docs-note">
+<p>A module whose name ends in <code>Editor</code> is only built into the editor. A module built for the editor <strong>may</strong> use the runtime modules, but a runtime module <strong>cannot</strong> use an editor module!</p>
+</div>
+<h2 id="the-descriptor">The descriptor</h2>
+<p><code>MyPlugin.hypplugin</code> is an HMF file:</p>
+<pre><code class="language-text">PluginDescriptor &quot;MyPlugin&quot; {
+    Version = &quot;1.0.0&quot;
+    Description = &quot;A plugin that does something.&quot;
+    EnabledByDefault = false
+}
+</code></pre>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>Shown in the Plugins window.</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Shown in the Plugins window.</td>
+</tr>
+<tr>
+<td>EnabledByDefault</td>
+<td>Whether new projects have it on.</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Names of plugins this one needs, they will come along for the ride.</td>
+</tr>
+<tr>
+<td>EngineMinVersion</td>
+<td>The oldest engine version it works with.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="a-module">A module</h2>
+<p>Each module is a class that implements <code>IPluginModule</code>, plus one macro to register it. <code>OnLoad</code> runs when the plugin is enabled, and gets a <code>PluginContext</code> to register things through:</p>
+<pre><code class="language-cpp">#include &lt;Plugins/PluginModule.hpp&gt;
+#include &lt;Plugins/PluginContext.hpp&gt;
+
+namespace Hyperion {
+
+class MyPluginModule final : public IPluginModule
+{
+public:
+    void OnLoad(PluginContext&amp; context) override
+    {
+        context.RegisterWorldSystem&lt;MySystem&gt;();
+    }
+};
+
+} // namespace Hyperion
+
+HYP_DEFINE_PLUGIN_MODULE(MyPlugin, MyPlugin, ::Hyperion::MyPluginModule)
+</code></pre>
+<p>The <code>HYP_DEFINE_PLUGIN_MODULE</code> macro takes the plugin's name, the module's name (the folder name) and the class. Anything you register through the context is removed again when the plugin unloads.</p>
+<h2 id="what-a-plugin-can-register">What a plugin can register</h2>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Call</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegisterWorldSystem&lt;T&gt;()</code></td>
+<td>Adds a <a href="/docs/world/systems.html">system</a> to every world. Optionally limit it to worlds with certain flags, or by a predicate.</td>
+</tr>
+<tr>
+<td><code>RegisterModelImportProcessor&lt;T&gt;()</code></td>
+<td>Runs after a model is imported, to add components or tweak the result. It can have its own import settings.</td>
+</tr>
+<tr>
+<td><code>AddCleanup(fn)</code></td>
+<td>Runs when the plugin unloads, for anything you set up yourself.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Components and other reflected classes (<code>HYP_CLASS</code>, <code>HYP_STRUCT</code>) register themselves, like they do in a game. Files in <code>Content</code> are added to the engine's assets. If you need to know where you're running, <code>IsEditorHost()</code> and <code>GetHostMode()</code> on the context tell you.</p>
+<h2 id="editor-modules">Editor modules</h2>
+<p>In an <code>Editor</code> module, <code>RegisterEditorExtension&lt;T&gt;(context)</code> adds an <code>EditorExtension</code>. It gets <code>Update</code>, <code>DebugDraw</code> and picking hooks for the viewport. There are similar calls for dropping assets onto entities and for setting up a new player.</p>
+<h2 id="editor-ui-in-c">Editor UI in C#</h2>
+<p>Editor panels and menus are written in C# with Avalonia, in the plugin's <code>Managed</code> folder. Mark a class with <code>[EditorPlugin]</code> and implement <code>IEditorPlugin</code>:</p>
+<pre><code class="language-csharp">[EditorPlugin(&quot;MyPlugin&quot;)]
+public sealed class MyPluginEditor : IEditorPlugin
+{
+    public void Register(EditorPluginRegistry registry)
+    {
+        registry.RegisterView&lt;MyPanelViewModel, MyPanelView&gt;();
+        registry.AddToolMenuItem(&quot;My Panel...&quot;, new RelayCommand(
+            () =&gt; PanelService.Instance.OpenPanel(new MyPanelViewModel())));
+    }
+}
+</code></pre>
+<p>The registry also lets you add:</p>
+<div class="docs-table-wrap">
+<table class="docs-table">
+<thead>
+<tr>
+<th>Call</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AddNodeMenuItem</td>
+<td>An entry in the Scene panel's right-click menu.</td>
+</tr>
+<tr>
+<td>AddDocument</td>
+<td>A document that docks in the editor, like AnimToolkit's graph editor.</td>
+</tr>
+<tr>
+<td>AddEditModeBar</td>
+<td>A bar that shows in a custom edit mode.</td>
+</tr>
+<tr>
+<td>RegisterPropertyEditor</td>
+<td>A custom Inspector control for fields marked with <code>EditorType = &quot;...&quot;</code>.</td>
+</tr>
+<tr>
+<td>AddComponentInspectorItem</td>
+<td>An extra row under a component in the Inspector.</td>
+</tr>
+<tr>
+<td>AddInspectorWarning</td>
+<td>A warning the Inspector shows for an entity.</td>
+</tr>
+<tr>
+<td>AddCreatableAssetClass, RegisterAssetIcon</td>
+<td>Make an asset type creatable from <strong>Add...</strong> and give it an icon.</td>
+</tr>
+<tr>
+<td>AddEntityDropAssetClass</td>
+<td>Let an asset type be dropped onto entities.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples">Examples</h2>
+<p>AnimToolkit in <code>Source/Plugins/AnimToolkit</code> is the full-size one. For something small to copy, <code>Tests/Plugins/PluginTest</code> has a system, an import processor, an editor extension, a panel and some content, in about a dozen files.</p>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/plugins/animtoolkit.html"><span>Previous</span>AnimToolkit</a><a class="next" href="/docs/multiplayer/"><span>Next</span>Multiplayer</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/plugins/creating-a-plugin.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">Table of contents</p>
+      <ul>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#the-descriptor">The descriptor</a></li>
+        <li><a href="#a-module">A module</a></li>
+        <li><a href="#what-a-plugin-can-register">What a plugin can register</a></li>
+        <li><a href="#editor-modules">Editor modules</a></li>
+        <li><a href="#editor-ui-in-c">Editor UI in C#</a></li>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <dialog class="docs-search" aria-label="Search the docs">
+    <div class="docs-search-box">
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false">
+      <p class="docs-search-status" role="status"></p>
+      <ul class="docs-search-results"></ul>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

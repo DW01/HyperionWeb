@@ -38,25 +38,25 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/get-started/get-the-code.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/get-started/building.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/get-started/project-layout.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/get-started/glossary.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -68,43 +68,43 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/tour.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/projects.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/prefabs.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/play-in-editor.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/build-game.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/build-game-csharp.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/editor/console.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -116,7 +116,7 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/world/entities.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -128,49 +128,49 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/world/streaming.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/world/swatches.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/scripting/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/scripting/first-script.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/scripting/engine-bindings.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/scripting/samples.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/materials.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -182,25 +182,25 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/baking.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/global-illumination.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/shaders.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/rendering/post-processing.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -212,13 +212,31 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/physics/rigid-bodies.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/physics/character-controllers.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hyperionengine.dev/docs/plugins/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hyperionengine.dev/docs/plugins/animtoolkit.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hyperionengine.dev/docs/plugins/creating-a-plugin.html</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -230,25 +248,25 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/multiplayer/server.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/multiplayer/replication.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/platforms/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/platforms/packaging.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -260,13 +278,13 @@
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/platforms/android.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://hyperionengine.dev/docs/platforms/ios.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

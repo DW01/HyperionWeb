@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- Generated file -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plugins · Hyperion Docs</title>
+  <meta name="description" content="Plugins add optional features to the engine and your game. They can extend the editor as well, to provide new tools and workflows.">
+  <link rel="canonical" href="https://hyperionengine.dev/docs/plugins/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="The Hyperion Contributors">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hyperion Engine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Plugins · Hyperion Docs">
+  <meta property="og:description" content="Plugins add optional features to the engine and your game. They can extend the editor as well, to provide new tools and workflows.">
+  <meta property="og:url" content="https://hyperionengine.dev/docs/plugins/">
+  <meta property="og:image" content="/assets/terrain-agx.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/docs/docs.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="/docs/docs.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Hyperion Engine — home"><img src="/assets/hyperion-logo.png" alt="" width="382" height="105"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/" aria-current="true">Docs</a>
+        <a class="nav-icon" href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener" aria-label="Hyperion Engine on GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+        <a class="nav-icon" href="https://discord.gg/Fv8PwMJEUb" rel="noopener" aria-label="Hyperion Engine on Discord" title="Discord"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-notice"><p><strong>Work in progress.</strong> These docs are new and are likely missing a lot of info. If you notice something wrong or missing, <a href="https://github.com/HyperionGameTech/HyperionEngine/issues" rel="noopener">open an issue</a>. PRs are welcome as well.</p></div>
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation">
+      <button type="button" class="docs-search-open">Search<kbd>/</kbd></button>
+      <p class="docs-nav-label">Docs</p>
+      <button type="button" class="docs-nav-toggle" aria-expanded="false" aria-controls="docs-nav">Browse the docs</button>
+      <ul class="docs-nav" id="docs-nav">
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/get-started/">Get started</a></li>
+        <li><a href="/docs/editor/">Editor</a></li>
+        <li><a href="/docs/world/">Scene management</a></li>
+        <li><a href="/docs/scripting/">Scripting</a></li>
+        <li><a href="/docs/rendering/">Rendering &amp; lighting</a></li>
+        <li><a href="/docs/physics/">Physics</a></li>
+        <li><a href="/docs/plugins/" aria-current="page">Plugins</a>
+          <ul>
+            <li><a href="/docs/plugins/animtoolkit.html">AnimToolkit</a></li>
+            <li><a href="/docs/plugins/creating-a-plugin.html">Creating your own plugin</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/multiplayer/">Multiplayer</a></li>
+        <li><a href="/docs/platforms/">Platforms</a></li>
+        <li><a href="/docs/contributing/">Contributing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main" class="docs-main">
+      <article class="docs-article">
+        <h1>Plugins</h1>
+        <p class="lede">Plugins add optional features to the engine and your game. They can extend the editor as well, to provide new tools and workflows.</p>
+
+<h2 id="turning-plugins-on-and-off">Turning plugins on and off</h2>
+<p>Open <strong>Plugins...</strong> from the editor's settings menu. Each plugin is listed with its version, description and the plugins it depends on. Tick the ones you want.</p>
+<p>When a plugin is off:</p>
+<ul>
+<li>its systems, import steps and editor tools don't load, and its C# assemblies aren't used.</li>
+<li>anything it added to your project's data is kept to prevent losing your data. If you choose to re-enable the plugin, your data will be available again.</li>
+</ul>
+<h2 id="built-in-plugins">Built-in plugins</h2>
+<ul class="docs-links">
+  <li><a href="/docs/plugins/animtoolkit.html">AnimToolkit</a><span>Skeletal animation, graphs and the animation editor.</span></li>
+  <li><a href="/docs/plugins/creating-a-plugin.html">Creating your own plugin</a><span>Layout, modules, and what a plugin can register.</span></li>
+</ul>
+      </article>
+      <nav class="docs-pager" aria-label="Previous and next"><a class="prev" href="/docs/physics/character-controllers.html"><span>Previous</span>Character controllers</a><a class="next" href="/docs/plugins/animtoolkit.html"><span>Next</span>AnimToolkit</a></nav>
+      <p class="docs-edit"><a href="https://github.com/HyperionGameTech/HyperionWeb/edit/main/docs-src/pages/plugins/index.md" rel="noopener">Improve this page on GitHub</a></p>
+    </main>
+
+    <aside class="docs-toc" aria-label="On this page">
+      <p class="docs-toc-title">Table of contents</p>
+      <ul>
+        <li><a href="#turning-plugins-on-and-off">Turning plugins on and off</a></li>
+        <li><a href="#built-in-plugins">Built-in plugins</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <dialog class="docs-search" aria-label="Search the docs">
+    <div class="docs-search-box">
+      <input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off" spellcheck="false">
+      <p class="docs-search-status" role="status"></p>
+      <ul class="docs-search-results"></ul>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Hyperion Engine</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <!-- <a href="/strata.html">Strata</a> -->
+        <a href="/samples.html">Samples</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/HyperionGameTech/HyperionEngine" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

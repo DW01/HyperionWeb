@@ -19,6 +19,7 @@
     { "section": "scripting", "pages": ["first-script", "engine-bindings", "samples"] },
     { "section": "rendering", "pages": ["materials", "lights", "baking", "global-illumination", "shaders", "post-processing"] },
     { "section": "physics", "pages": ["rigid-bodies", "character-controllers"] },
+    { "section": "plugins", "pages": ["animtoolkit", "creating-a-plugin"] },
     { "section": "multiplayer", "pages": ["server", "replication"] },
     { "section": "platforms", "pages": ["packaging", "web", "android", "ios"] },
     { "section": "contributing", "pages": [] }
