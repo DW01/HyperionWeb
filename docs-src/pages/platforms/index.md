@@ -11,11 +11,11 @@ summary: Supported platforms, packaging and platform notes.
 |---|---|
 | Windows (x64, ARM64) | Yes. Runtime and editor. DirectX 12 by default, or Vulkan. |
 | macOS | Yes. Runtime and editor. |
+| Linux | Yes. Runtime and editor. |
 | Web | Yes, through WebAssembly and WebGPU. Runtime only, built from the Windows editor. |
 | Android | Supported - not stable yet. |
 | iOS | Supported - not stable yet. |
 | Steam Deck | Yes, through Proton. Input and resolution handling still need work. |
-| Linux | *Planned* |
 
 The engine compiles on Linux with GCC, but it isn't a supported platform yet. [Contributions](/docs/contributing/) are welcome on this front (as well as anywhere else)
 
