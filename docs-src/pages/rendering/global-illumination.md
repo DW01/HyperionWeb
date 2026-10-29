@@ -11,7 +11,6 @@ summary: The GI options, and how to toggle them.
 |---|---|:---:|
 | Lightmaps | Baked bounce light for static geometry. See [baking](/docs/rendering/baking.html). | |
 | Glimmer | Realtime bounce light and sky occlusion, traced in software. On by default, off on mobile. | |
-| SSGI | Bounce light worked out from what's on screen. | |
 | SSR | Reflections from what's on screen. | |
 | GTAO | Soft shadows in corners and crevices. | |
 | DDGI | Realtime bounce light from ray-traced probes. | ✓ |
@@ -21,14 +20,22 @@ These can be combined. A typical setup is baked lightmaps and probes, with SSR a
 
 ## Glimmer
 
-Glimmer is Hyperion's own realtime GI. It traces rays in compute shaders rather than with ray tracing hardware, and runs on DirectX 12, Vulkan (Windows and macOS) and WebGPU. Nothing needs baking: move the sun or a wall and the bounce light follows.
+![Grassy hills, pine trees and distant mountains at dusk, lit by Glimmer](/assets/terrain-glimmer.jpg)
 
-It's built for static geometry. Moving objects receive its light, but don't affect it.
+Glimmer is Hyperion's realtime GI system.
+
+It traces rays in compute shaders rather than requiring ray tracing hardware. Nothing needs baking, so you can rotate the sun, move a local light, or a wall and the bounce light follows.
+
+::: note
+Glimmer supports light bounced/emitted from static geometry and emitted from local lights. Dynamic objects receive its light, but don't affect it.
+
+Time of day changes are supported due to Glimmer storing precomputed radiance transfer (PRT) data.
+:::
 
 - Near the camera, probes trace against the scene's meshes. They're placed around solid geometry, so light doesn't leak through walls.
 - Further out, a coarser grid traces a voxelized version of the scene, plus a heightfield for terrain.
 - Changing the sun or sky relights the scene without tracing it again.
-- Static point and spot lights add their bounce light
+- Static point and spot lights add their bounce light.
 - Lightmapped surfaces keep their lightmaps. Glimmer lights everything else.
 - Sky reflections are dimmed where the sky is blocked, so interiors don't glow with sky color.
 
@@ -44,7 +51,6 @@ Each has a console variable. Toggle them from the [console](/docs/editor/console
 |---|---|
 | Rendering.LightmapVolumes | Baked lightmaps |
 | Rendering.Glimmer.Enabled | Glimmer |
-| Rendering.SSGI | SSGI. Off in the default config. |
 | Rendering.SSR | SSR. Off in the default config. |
 | Rendering.GTAO | GTAO |
 | Rendering.DDGI | DDGI. Off by default. |

@@ -86,11 +86,11 @@
         <figure class="docs-hero docs-hero-crop" style="aspect-ratio: 1830 / 773"><img src="/assets/editor-scene.jpg" alt="A brick-walled room with a red sphere, coloured boxes and a pillar, in the Hyperion editor viewport" width="2560" height="1540" style="width: 139.8907%; left: -39.1803%; top: -30.0129%" fetchpriority="high"></figure>
 <h2 id="overview">Overview</h2>
 <ul>
-<li><strong>Backends</strong>: DirectX 12 is the default on Windows, and Vulkan is used everywhere else (through MoltenVK on Apple platforms). Windows builds can also use Vulkan. Web builds use WebGPU.</li>
+<li><strong>Glimmer realtime GI</strong>: Hyperion's own global illumination, on by default. Bounce light and sky occlusion are traced in compute shaders, so there's nothing to bake and no ray tracing hardware needed. It runs on desktop and in the browser, and relights instantly when the sun or sky changes. See <a href="/docs/rendering/global-illumination.html#glimmer">Glimmer</a>.</li>
+<li><strong>Backends</strong>: DirectX 12 is the default on Windows, and Vulkan is used everywhere else (Linux, Android, and through MoltenVK on Apple platforms). Windows builds can also use Vulkan. Web builds use WebGPU.</li>
 <li><strong>Clustered deferred shading</strong> supports large numbers of dynamic lights. Translucent materials use a forward clustered pass.</li>
-<li><strong>Baked lighting</strong> comes from the lightmapper built into the editor, along with reflection and irradiance probes for moving objects.</li>
-<li><strong>Realtime GI &amp; reflections</strong>: In addition to our baked lighting, <strong>Glimmer</strong> gives you realtime GI on desktop and in the browser, no ray tracing hardware needed. It's on by default.
-HWRT-supported devices can also use DDGI and ray traced reflections. For non-HWRT we have screen space reflections. <em>Screen space global illumination deprecatation is planned so it is not recommended to use</em></li>
+<li><strong>Baked lighting</strong> comes from the lightmapper built into the editor, along with reflection and irradiance probes for moving objects. Glimmer lights everything that isn't lightmapped.</li>
+<li><strong>Ray tracing</strong>: HWRT-supported devices can also use DDGI and ray traced reflections. For non-HWRT we have screen space reflections. <em>Screen space global illumination deprecation is planned so it is not recommended to use</em></li>
 <li><strong>Shaders</strong> are written in HLSL, compiled with DXC, and reload live in the editor on save.</li>
 </ul>
 <h2 id="in-this-section">In this section</h2>

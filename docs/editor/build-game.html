@@ -130,7 +130,7 @@
 </div>
 <p>This page covers C++; switch to C# at the top of the page.</p>
 <div class="docs-note">
-<p>Building from the editor is Windows-only for now.</p>
+<p>This page uses Windows paths. On Linux and macOS, the build needs CMake and the same C++ compiler the engine was built with (<code>g++</code> or <code>clang++</code>) on your PATH, and uses Ninja if it's installed. Output goes to <code>Binaries/Linux/</code> or <code>Binaries/Mac/</code>, executables have no <code>.exe</code>, and the build script is <code>build.sh</code>.</p>
 </div>
 <h2 id="generate-the-c-project">Generate the C++ project</h2>
 <p>Save your project first, then choose <strong>Build › Generate Game Project...</strong> and pick <strong>C++</strong>. The editor adds a <code>Source</code> folder to your project and opens it (or opens it in Visual Studio, if <strong>Open in Visual Studio</strong> is ticked):</p>

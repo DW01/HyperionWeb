@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Build the engine · Hyperion Docs</title>
-  <meta name="description" content="Install the prerequisites and build Hyperion Engine and its editor on Windows or macOS.">
+  <meta name="description" content="Install the prerequisites and build Hyperion Engine and its editor on Windows, macOS or Linux.">
   <link rel="canonical" href="https://hyperionengine.dev/docs/get-started/building.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="The Hyperion Contributors">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Hyperion Engine">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Build the engine · Hyperion Docs">
-  <meta property="og:description" content="Install the prerequisites and build Hyperion Engine and its editor on Windows or macOS.">
+  <meta property="og:description" content="Install the prerequisites and build Hyperion Engine and its editor on Windows, macOS or Linux.">
   <meta property="og:url" content="https://hyperionengine.dev/docs/get-started/building.html">
   <meta property="og:image" content="/assets/terrain-agx.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -107,6 +107,10 @@
 <td>The <strong>Vulkan SDK</strong>, plus <code>brew install molten-vk</code> (or run <code>Tools/Scripts/InstallDependenciesMac.sh</code>). MoltenVK translates Vulkan to Metal for us.</td>
 </tr>
 <tr>
+<td>Linux</td>
+<td>GCC or Clang, the <strong>Vulkan SDK</strong> with <code>VULKAN_SDK</code> set, and the X11, OpenAL and Vulkan loader dev packages. On Ubuntu/Debian: <code>sudo apt install libx11-dev libopenal-dev libvulkan-dev</code>. Ninja is optional.</td>
+</tr>
+<tr>
 <td>Android</td>
 <td>The Android NDK (we test with NDK 29), and Ninja on your PATH. See <a href="/docs/platforms/android.html">Android</a>.</td>
 </tr>
@@ -128,6 +132,10 @@
 <pre><code class="language-shell">./build.sh Release
 </code></pre>
 <p>To generate an Xcode project: <code>./build.sh Xcode Release</code></p>
+<h3 id="linux">Linux</h3>
+<pre><code class="language-shell">./build.sh Release
+</code></pre>
+<p>CMake uses your system's default compiler, usually GCC. To use Clang, set <code>CC=clang CXX=clang++</code> first. Add <code>ninja</code> (<code>./build.sh Release ninja</code>) to build with Ninja instead of Makefiles.</p>
 <div class="docs-note">
 <p>The script asks if you want to regenerate the CMake project first, and moves on without it after 3 seconds. Answer yes if you've added or removed source files. Pass <code>Regenerate</code> to always regenerate, or <code>NoWait</code> to skip the question.</p>
 </div>
@@ -173,7 +181,7 @@
 <p>CodeGen is a build tool that reads the engine's headers and generates the reflection, serialization and scripting bindings. It runs automatically when CMake configures, so you don't normally run it yourself.</p>
 <p>Its output goes into <code>Source/Generated/</code>. Don't edit those files by hand; they're overwritten on every run.</p>
 <h2 id="run-it">Run it</h2>
-<p>Build output goes to <code>Binaries/&lt;Platform&gt;/&lt;Config&gt;/</code>, for example <code>Binaries/Windows/Release/</code> or <code>Binaries/Mac/Release/</code>. The main executables are:</p>
+<p>Build output goes to <code>Binaries/&lt;Platform&gt;/&lt;Config&gt;/</code>, for example <code>Binaries/Windows/Release/</code>, <code>Binaries/Mac/Release/</code> or <code>Binaries/Linux/Release/</code>. The main executables are:</p>
 <ul>
 <li><code>Hyperion.Editor</code> (<code>.exe</code> on Windows), the editor.</li>
 <li><code>hyperion-sample</code> (<code>.exe</code> on Windows), the C++ sample game.</li>

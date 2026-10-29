@@ -9,15 +9,15 @@ summary: Supported platforms, packaging and platform notes.
 
 | Platform | Status |
 |---|---|
-| Windows (x64, ARM64) | Yes. Runtime and editor. DirectX 12 by default, or Vulkan. |
-| macOS | Yes. Runtime and editor. |
-| Linux | Yes. Runtime and editor. |
+| Windows (x64, arm64) | Yes. Runtime and editor. DirectX 12 by default, or Vulkan. |
+| macOS (arm64) | Yes. Runtime and editor. |
+| Linux (x64) | Yes. Runtime and editor. |
 | Web | Yes, through WebAssembly and WebGPU. Runtime only, built from the Windows editor. |
 | Android | Supported - not stable yet. |
 | iOS | Supported - not stable yet. |
 | Steam Deck | Yes, through Proton. Input and resolution handling still need work. |
 
-The engine compiles on Linux with GCC, but it isn't a supported platform yet. [Contributions](/docs/contributing/) are welcome on this front (as well as anywhere else)
+Linux is newer than the other desktop platforms, so expect some rough edges. [Contributions](/docs/contributing/) are welcome on this front (as well as anywhere else).
 
 ## In this section
 
@@ -28,7 +28,7 @@ children
 
 ## Steam Deck
 
-There's no native Linux build yet, so on the Deck you run the Windows build through Proton. Controller input and resolution handling still need work here
+On the Deck, run the Windows build through Proton. Controller input and resolution handling still need work here. The native Linux build hasn't been tested on the Deck yet.
 
 ## Per-platform settings
 

@@ -1,6 +1,6 @@
 ---
 title: Build the engine
-description: Install the prerequisites and build Hyperion Engine and its editor on Windows or macOS.
+description: Install the prerequisites and build Hyperion Engine and its editor on Windows, macOS or Linux.
 lede: Installing prerequisites and getting the build going
 summary: Prerequisites and build commands.
 ---
@@ -18,6 +18,7 @@ Per platform:
 |---|---|
 | Windows | Visual Studio 2026 (MSVC, or the Clang that ships with it), and [vcpkg](https://github.com/microsoft/vcpkg) with the `VCPKG_ROOT` environment variable pointing at it. |
 | macOS | The **Vulkan SDK**, plus `brew install molten-vk` (or run `Tools/Scripts/InstallDependenciesMac.sh`). MoltenVK translates Vulkan to Metal for us. |
+| Linux | GCC or Clang, the **Vulkan SDK** with `VULKAN_SDK` set, and the X11, OpenAL and Vulkan loader dev packages. On Ubuntu/Debian: `sudo apt install libx11-dev libopenal-dev libvulkan-dev`. Ninja is optional. |
 | Android | The Android NDK (we test with NDK 29), and Ninja on your PATH. See [Android](/docs/platforms/android.html). |
 | Web | [emsdk](https://emscripten.org/docs/getting_started/downloads.html) with the `EMSDK` environment variable pointing at it, and Ninja on your PATH. |
 
@@ -42,6 +43,14 @@ On Windows the default rendering backend is DirectX 12. To build with Vulkan ins
 ```
 
 To generate an Xcode project: `./build.sh Xcode Release`
+
+### Linux
+
+```shell
+./build.sh Release
+```
+
+CMake uses your system's default compiler, usually GCC. To use Clang, set `CC=clang CXX=clang++` first. Add `ninja` (`./build.sh Release ninja`) to build with Ninja instead of Makefiles.
 
 ::: note
 The script asks if you want to regenerate the CMake project first, and moves on without it after 3 seconds. Answer yes if you've added or removed source files. Pass `Regenerate` to always regenerate, or `NoWait` to skip the question.
@@ -68,7 +77,7 @@ Its output goes into `Source/Generated/`. Don't edit those files by hand; they'r
 
 ## Run it
 
-Build output goes to `Binaries/<Platform>/<Config>/`, for example `Binaries/Windows/Release/` or `Binaries/Mac/Release/`. The main executables are:
+Build output goes to `Binaries/<Platform>/<Config>/`, for example `Binaries/Windows/Release/`, `Binaries/Mac/Release/` or `Binaries/Linux/Release/`. The main executables are:
 
 - `Hyperion.Editor` (`.exe` on Windows), the editor.
 - `hyperion-sample` (`.exe` on Windows), the C++ sample game.

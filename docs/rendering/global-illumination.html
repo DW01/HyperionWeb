@@ -106,11 +106,6 @@
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td>SSGI</td>
-<td>Bounce light worked out from what's on screen.</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
 <td>SSR</td>
 <td>Reflections from what's on screen.</td>
 <td style="text-align:center"></td>
@@ -135,13 +130,18 @@
 </div>
 <p>These can be combined. A typical setup is baked lightmaps and probes, with SSR and GTAO on top.</p>
 <h2 id="glimmer">Glimmer</h2>
-<p>Glimmer is Hyperion's own realtime GI. It traces rays in compute shaders rather than with ray tracing hardware, and runs on DirectX 12, Vulkan (Windows and macOS) and WebGPU. Nothing needs baking: move the sun or a wall and the bounce light follows.</p>
-<p>It's built for static geometry. Moving objects receive its light, but don't affect it.</p>
+<p><img class="docs-shot" src="/assets/terrain-glimmer.jpg" alt="Grassy hills, pine trees and distant mountains at dusk, lit by Glimmer" width="1418" height="656" loading="lazy"></p>
+<p>Glimmer is Hyperion's realtime GI system.</p>
+<p>It traces rays in compute shaders rather than requiring ray tracing hardware. Nothing needs baking, so you can rotate the sun, move a local light, or a wall and the bounce light follows.</p>
+<div class="docs-note">
+<p>Glimmer supports light bounced/emitted from static geometry and emitted from local lights. Dynamic objects receive its light, but don't affect it.</p>
+<p>Time of day changes are supported due to Glimmer storing precomputed radiance transfer (PRT) data.</p>
+</div>
 <ul>
 <li>Near the camera, probes trace against the scene's meshes. They're placed around solid geometry, so light doesn't leak through walls.</li>
 <li>Further out, a coarser grid traces a voxelized version of the scene, plus a heightfield for terrain.</li>
 <li>Changing the sun or sky relights the scene without tracing it again.</li>
-<li>Static point and spot lights add their bounce light</li>
+<li>Static point and spot lights add their bounce light.</li>
 <li>Lightmapped surfaces keep their lightmaps. Glimmer lights everything else.</li>
 <li>Sky reflections are dimmed where the sky is blocked, so interiors don't glow with sky color.</li>
 </ul>
@@ -165,10 +165,6 @@
 <tr>
 <td>Rendering.Glimmer.Enabled</td>
 <td>Glimmer</td>
-</tr>
-<tr>
-<td>Rendering.SSGI</td>
-<td>SSGI. Off in the default config.</td>
 </tr>
 <tr>
 <td>Rendering.SSR</td>

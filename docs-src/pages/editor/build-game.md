@@ -25,7 +25,7 @@ summary: Generate a C++ or C# project, build it, and run your game outside the e
 This page covers C++; switch to C# at the top of the page.
 
 ::: note
-Building from the editor is Windows-only for now.
+This page uses Windows paths. On Linux and macOS, the build needs CMake and the same C++ compiler the engine was built with (`g++` or `clang++`) on your PATH, and uses Ninja if it's installed. Output goes to `Binaries/Linux/` or `Binaries/Mac/`, executables have no `.exe`, and the build script is `build.sh`.
 :::
 
 ## Generate the C++ project
